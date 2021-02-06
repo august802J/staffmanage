@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.115.90.240:3306/staff?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    password: ENC(BmC+C4rDpGy/wzJpA84vPA==)
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
