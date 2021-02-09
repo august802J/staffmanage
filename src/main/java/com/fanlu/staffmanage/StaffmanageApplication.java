@@ -1,8 +1,10 @@
 package com.fanlu.staffmanage;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@MapperScan("com.fanlu.staffmanage.mapper")
 @SpringBootApplication
 public class StaffmanageApplication {
 
