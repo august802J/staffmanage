@@ -1,32 +1,40 @@
 package com.fanlu.staffmanage.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 
-public class StaffAbility {
+/**
+ * staff_ability
+ * @author 
+ */
+public class StaffAbility implements Serializable {
+    private Integer id;
 
-    private long id;
-    private long staffId;
+    private Integer staffId;
+
     private String staffAbiTime;
+
     private String staffAbiAbi;
-    private java.sql.Timestamp staffAbiUpdateTime;
 
+    private Date staffAbiUpdatetime;
 
-    public long getId() {
+    private static final long serialVersionUID = 1L;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-
-    public long getStaffId() {
+    public Integer getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(long staffId) {
+    public void setStaffId(Integer staffId) {
         this.staffId = staffId;
     }
-
 
     public String getStaffAbiTime() {
         return staffAbiTime;
@@ -36,7 +44,6 @@ public class StaffAbility {
         this.staffAbiTime = staffAbiTime;
     }
 
-
     public String getStaffAbiAbi() {
         return staffAbiAbi;
     }
@@ -45,13 +52,11 @@ public class StaffAbility {
         this.staffAbiAbi = staffAbiAbi;
     }
 
-
-    public java.sql.Timestamp getStaffAbiUpdateTime() {
-        return staffAbiUpdateTime;
+    public Date getStaffAbiUpdatetime() {
+        return staffAbiUpdatetime;
     }
 
-    public void setStaffAbiUpdateTime(java.sql.Timestamp staffAbiUpdateTime) {
-        this.staffAbiUpdateTime = staffAbiUpdateTime;
+    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
+        this.staffAbiUpdatetime = staffAbiUpdatetime;
     }
-
 }

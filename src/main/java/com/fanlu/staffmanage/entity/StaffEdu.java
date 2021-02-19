@@ -1,57 +1,62 @@
 package com.fanlu.staffmanage.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 
-public class StaffEdu {
+/**
+ * staff_ability
+ * @author 
+ */
+public class StaffEdu implements Serializable {
+    private Integer id;
 
-  private long id;
-  private long staffId;
-  private String staffEduDuration;
-  private String staffEduExp;
-  private java.sql.Timestamp staffEduUpdateTime;
+    private Integer staffId;
 
+    private String staffAbiTime;
 
-  public long getId() {
-    return id;
-  }
+    private String staffAbiAbi;
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    private Date staffAbiUpdatetime;
 
+    private static final long serialVersionUID = 1L;
 
-  public long getStaffId() {
-    return staffId;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setStaffId(long staffId) {
-    this.staffId = staffId;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Integer getStaffId() {
+        return staffId;
+    }
 
-  public String getStaffEduDuration() {
-    return staffEduDuration;
-  }
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
 
-  public void setStaffEduDuration(String staffEduDuration) {
-    this.staffEduDuration = staffEduDuration;
-  }
+    public String getStaffAbiTime() {
+        return staffAbiTime;
+    }
 
+    public void setStaffAbiTime(String staffAbiTime) {
+        this.staffAbiTime = staffAbiTime;
+    }
 
-  public String getStaffEduExp() {
-    return staffEduExp;
-  }
+    public String getStaffAbiAbi() {
+        return staffAbiAbi;
+    }
 
-  public void setStaffEduExp(String staffEduExp) {
-    this.staffEduExp = staffEduExp;
-  }
+    public void setStaffAbiAbi(String staffAbiAbi) {
+        this.staffAbiAbi = staffAbiAbi;
+    }
 
+    public Date getStaffAbiUpdatetime() {
+        return staffAbiUpdatetime;
+    }
 
-  public java.sql.Timestamp getStaffEduUpdateTime() {
-    return staffEduUpdateTime;
-  }
-
-  public void setStaffEduUpdateTime(java.sql.Timestamp staffEduUpdateTime) {
-    this.staffEduUpdateTime = staffEduUpdateTime;
-  }
-
+    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
+        this.staffAbiUpdatetime = staffAbiUpdatetime;
+    }
 }

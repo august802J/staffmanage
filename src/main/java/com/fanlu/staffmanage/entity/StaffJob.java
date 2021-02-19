@@ -1,87 +1,62 @@
 package com.fanlu.staffmanage.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 
-public class StaffJob {
+/**
+ * staff_ability
+ * @author 
+ */
+public class StaffJob implements Serializable {
+    private Integer id;
 
-  private long id;
-  private long staffId;
-  private String staffJobDuration;
-  private String staffJobCorp;
-  private String staffJobJob;
-  private String staffJobWage;
-  private String staffJobReason;
-  private java.sql.Timestamp staffInfoUpdateTime;
+    private Integer staffId;
 
+    private String staffAbiTime;
 
-  public long getId() {
-    return id;
-  }
+    private String staffAbiAbi;
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    private Date staffAbiUpdatetime;
 
+    private static final long serialVersionUID = 1L;
 
-  public long getStaffId() {
-    return staffId;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setStaffId(long staffId) {
-    this.staffId = staffId;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Integer getStaffId() {
+        return staffId;
+    }
 
-  public String getStaffJobDuration() {
-    return staffJobDuration;
-  }
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
 
-  public void setStaffJobDuration(String staffJobDuration) {
-    this.staffJobDuration = staffJobDuration;
-  }
+    public String getStaffAbiTime() {
+        return staffAbiTime;
+    }
 
+    public void setStaffAbiTime(String staffAbiTime) {
+        this.staffAbiTime = staffAbiTime;
+    }
 
-  public String getStaffJobCorp() {
-    return staffJobCorp;
-  }
+    public String getStaffAbiAbi() {
+        return staffAbiAbi;
+    }
 
-  public void setStaffJobCorp(String staffJobCorp) {
-    this.staffJobCorp = staffJobCorp;
-  }
+    public void setStaffAbiAbi(String staffAbiAbi) {
+        this.staffAbiAbi = staffAbiAbi;
+    }
 
+    public Date getStaffAbiUpdatetime() {
+        return staffAbiUpdatetime;
+    }
 
-  public String getStaffJobJob() {
-    return staffJobJob;
-  }
-
-  public void setStaffJobJob(String staffJobJob) {
-    this.staffJobJob = staffJobJob;
-  }
-
-
-  public String getStaffJobWage() {
-    return staffJobWage;
-  }
-
-  public void setStaffJobWage(String staffJobWage) {
-    this.staffJobWage = staffJobWage;
-  }
-
-
-  public String getStaffJobReason() {
-    return staffJobReason;
-  }
-
-  public void setStaffJobReason(String staffJobReason) {
-    this.staffJobReason = staffJobReason;
-  }
-
-
-  public java.sql.Timestamp getStaffInfoUpdateTime() {
-    return staffInfoUpdateTime;
-  }
-
-  public void setStaffInfoUpdateTime(java.sql.Timestamp staffInfoUpdateTime) {
-    this.staffInfoUpdateTime = staffInfoUpdateTime;
-  }
-
+    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
+        this.staffAbiUpdatetime = staffAbiUpdatetime;
+    }
 }

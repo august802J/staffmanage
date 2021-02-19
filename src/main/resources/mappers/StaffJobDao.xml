@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanlu.staffmanage.dao.StaffJobDao">
+  <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.StaffJob">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
+    <result column="staff_abi_time" jdbcType="VARCHAR" property="staffAbiTime" />
+    <result column="staff_abi_abi" jdbcType="VARCHAR" property="staffAbiAbi" />
+    <result column="staff_abi_updateTime" jdbcType="TIMESTAMP" property="staffAbiUpdatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, staff_id, staff_abi_time, staff_abi_abi, staff_abi_updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from staff_ability
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from staff_ability
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffJob" useGeneratedKeys="true">
+    insert into staff_ability (staff_id, staff_abi_time, staff_abi_abi, 
+      staff_abi_updateTime)
+    values (#{staffId,jdbcType=INTEGER}, #{staffAbiTime,jdbcType=VARCHAR}, #{staffAbiAbi,jdbcType=VARCHAR}, 
+      #{staffAbiUpdatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffJob" useGeneratedKeys="true">
+    insert into staff_ability
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="staffAbiTime != null">
+        staff_abi_time,
+      </if>
+      <if test="staffAbiAbi != null">
+        staff_abi_abi,
+      </if>
+      <if test="staffAbiUpdatetime != null">
+        staff_abi_updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffAbiTime != null">
+        #{staffAbiTime,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAbiAbi != null">
+        #{staffAbiAbi,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAbiUpdatetime != null">
+        #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.StaffJob">
+    update staff_ability
+    <set>
+      <if test="staffId != null">
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffAbiTime != null">
+        staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAbiAbi != null">
+        staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
+      </if>
+      <if test="staffAbiUpdatetime != null">
+        staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.StaffJob">
+    update staff_ability
+    set staff_id = #{staffId,jdbcType=INTEGER},
+      staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
+      staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
+      staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

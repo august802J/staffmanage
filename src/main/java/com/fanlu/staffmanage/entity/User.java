@@ -1,77 +1,62 @@
 package com.fanlu.staffmanage.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 
-public class User {
+/**
+ * staff_ability
+ * @author 
+ */
+public class User implements Serializable {
+    private Integer id;
 
-  private long id;
-  private long groupId;
-  private String account;
-  private String password;
-  private long auth;
-  private String name;
-  private String job;
+    private Integer staffId;
 
+    private String staffAbiTime;
 
-  public long getId() {
-    return id;
-  }
+    private String staffAbiAbi;
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    private Date staffAbiUpdatetime;
 
+    private static final long serialVersionUID = 1L;
 
-  public long getGroupId() {
-    return groupId;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setGroupId(long groupId) {
-    this.groupId = groupId;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Integer getStaffId() {
+        return staffId;
+    }
 
-  public String getAccount() {
-    return account;
-  }
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
 
-  public void setAccount(String account) {
-    this.account = account;
-  }
+    public String getStaffAbiTime() {
+        return staffAbiTime;
+    }
 
+    public void setStaffAbiTime(String staffAbiTime) {
+        this.staffAbiTime = staffAbiTime;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getStaffAbiAbi() {
+        return staffAbiAbi;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setStaffAbiAbi(String staffAbiAbi) {
+        this.staffAbiAbi = staffAbiAbi;
+    }
 
+    public Date getStaffAbiUpdatetime() {
+        return staffAbiUpdatetime;
+    }
 
-  public long getAuth() {
-    return auth;
-  }
-
-  public void setAuth(long auth) {
-    this.auth = auth;
-  }
-
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public String getJob() {
-    return job;
-  }
-
-  public void setJob(String job) {
-    this.job = job;
-  }
-
+    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
+        this.staffAbiUpdatetime = staffAbiUpdatetime;
+    }
 }
