@@ -21,38 +21,41 @@
     <result column="staff_eva_managerAtt" jdbcType="VARCHAR" property="staffEvaManageratt" />
     <result column="staff_info_updateTime" jdbcType="TIMESTAMP" property="staffInfoUpdatetime" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, staff_id, staff_eva_job, staff_eva_manager, staff_eva_score, staff_eva_attitude, 
     staff_eva_complete, staff_eva_late, staff_eva_leave, staff_eva_absent, staff_eva_coop, 
     staff_eva_behavior, staff_eva_relation, staff_eva_coopBehavior, staff_eva_connection, 
     staff_eva_manageCop, staff_eva_managerAtt, staff_info_updateTime
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff_evaluation
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff_evaluation
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation" useGeneratedKeys="true">
     insert into staff_evaluation (staff_id, staff_eva_job, staff_eva_manager, 
       staff_eva_score, staff_eva_attitude, staff_eva_complete, 
       staff_eva_late, staff_eva_leave, staff_eva_absent, 
       staff_eva_coop, staff_eva_behavior, staff_eva_relation, 
       staff_eva_coopBehavior, staff_eva_connection, 
-      staff_eva_manageCop, staff_eva_managerAtt, 
-      staff_info_updateTime)
+      staff_eva_manageCop, staff_eva_managerAtt)
     values (#{staffId,jdbcType=INTEGER}, #{staffEvaJob,jdbcType=VARCHAR}, #{staffEvaManager,jdbcType=VARCHAR}, 
       #{staffEvaScore,jdbcType=VARCHAR}, #{staffEvaAttitude,jdbcType=VARCHAR}, #{staffEvaComplete,jdbcType=VARCHAR}, 
       #{staffEvaLate,jdbcType=INTEGER}, #{staffEvaLeave,jdbcType=INTEGER}, #{staffEvaAbsent,jdbcType=INTEGER}, 
       #{staffEvaCoop,jdbcType=VARCHAR}, #{staffEvaBehavior,jdbcType=VARCHAR}, #{staffEvaRelation,jdbcType=VARCHAR}, 
       #{staffEvaCoopbehavior,jdbcType=VARCHAR}, #{staffEvaConnection,jdbcType=VARCHAR}, 
-      #{staffEvaManagecop,jdbcType=VARCHAR}, #{staffEvaManageratt,jdbcType=VARCHAR}, 
-      #{staffInfoUpdatetime,jdbcType=TIMESTAMP})
+      #{staffEvaManagecop,jdbcType=VARCHAR}, #{staffEvaManageratt,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation" useGeneratedKeys="true">
     insert into staff_evaluation
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -104,9 +107,6 @@
       <if test="staffEvaManageratt != null">
         staff_eva_managerAtt,
       </if>
-      <if test="staffInfoUpdatetime != null">
-        staff_info_updateTime,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="staffId != null">
@@ -157,11 +157,9 @@
       <if test="staffEvaManageratt != null">
         #{staffEvaManageratt,jdbcType=VARCHAR},
       </if>
-      <if test="staffInfoUpdatetime != null">
-        #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation">
     update staff_evaluation
     <set>
@@ -213,12 +211,10 @@
       <if test="staffEvaManageratt != null">
         staff_eva_managerAtt = #{staffEvaManageratt,jdbcType=VARCHAR},
       </if>
-      <if test="staffInfoUpdatetime != null">
-        staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation">
     update staff_evaluation
     set staff_id = #{staffId,jdbcType=INTEGER},
@@ -236,8 +232,8 @@
       staff_eva_coopBehavior = #{staffEvaCoopbehavior,jdbcType=VARCHAR},
       staff_eva_connection = #{staffEvaConnection,jdbcType=VARCHAR},
       staff_eva_manageCop = #{staffEvaManagecop,jdbcType=VARCHAR},
-      staff_eva_managerAtt = #{staffEvaManageratt,jdbcType=VARCHAR},
-      staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP}
+      staff_eva_managerAtt = #{staffEvaManageratt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

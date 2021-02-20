@@ -23,6 +23,12 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
+        this.auth = 1;
+    }
+
     public Integer getId() {
         return id;
     }

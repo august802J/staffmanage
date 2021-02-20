@@ -1,5 +1,7 @@
 package com.fanlu.staffmanage.entity;
 
+import com.fanlu.staffmanage.dto.Inc;
+
 import java.io.Serializable;
 
 /**
@@ -40,6 +42,24 @@ public class UserCoop implements Serializable {
     private Byte userCoopIscheck;
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 将 Inc 类转换成 UserCoop 类
+     * @param inc
+     */
+    public UserCoop(Inc inc) {
+        this.userCoopName = inc.getInc_name();
+        this.userCoopIcp = inc.getInc_icp();
+        this.userCoopAddr = inc.getInc_place();
+        this.userCoopRage = inc.getInc_rage();
+        this.userCoopKind = inc.getKind();
+        this.userCoopNum = inc.getInc_count();
+        this.userPerName = inc.getLegal_name();
+        this.userPerJob = inc.getLegal_job();
+        this.userPerIdkind = inc.getLegal_idkind();
+        this.userPerId = inc.getLegal_id();
+        this.userPerPhone = inc.getLegal_phone();
+    }
 
     public Integer getId() {
         return id;

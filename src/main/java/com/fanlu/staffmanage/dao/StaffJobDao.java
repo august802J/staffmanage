@@ -1,7 +1,9 @@
 package com.fanlu.staffmanage.dao;
 
 import com.fanlu.staffmanage.entity.StaffJob;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface StaffJobDao {
     int deleteByPrimaryKey(Integer id);
 

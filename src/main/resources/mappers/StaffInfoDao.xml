@@ -26,6 +26,7 @@
     <result column="staff_info_edu" jdbcType="INTEGER" property="staffInfoEdu" />
     <result column="staff_info_wage" jdbcType="INTEGER" property="staffInfoWage" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, staff_info_url, staff_info_name, staff_info_race, staff_info_age, staff_info_sex, 
     staff_info_birth, staff_info_height, staff_info_party, staff_info_phone, staff_info_email, 
@@ -33,16 +34,19 @@
     staff_info_native, staff_info_wantJob, staff_info_wantCorp, staff_info_wantWage, 
     staff_info_groupId, staff_info_updateTime, staff_info_edu, staff_info_wage
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffInfo" useGeneratedKeys="true">
     insert into staff_info (staff_info_url, staff_info_name, staff_info_race, 
       staff_info_age, staff_info_sex, staff_info_birth, 
@@ -50,17 +54,16 @@
       staff_info_email, staff_info_address, staff_info_marrige, 
       staff_info_idNum, staff_info_nowAddress, staff_info_native, 
       staff_info_wantJob, staff_info_wantCorp, staff_info_wantWage, 
-      staff_info_groupId, staff_info_updateTime, 
-      staff_info_edu, staff_info_wage)
+      staff_info_groupId, staff_info_edu, staff_info_wage)
     values (#{staffInfoUrl,jdbcType=VARCHAR}, #{staffInfoName,jdbcType=VARCHAR}, #{staffInfoRace,jdbcType=VARCHAR}, 
       #{staffInfoAge,jdbcType=INTEGER}, #{staffInfoSex,jdbcType=VARCHAR}, #{staffInfoBirth,jdbcType=VARCHAR}, 
       #{staffInfoHeight,jdbcType=VARCHAR}, #{staffInfoParty,jdbcType=VARCHAR}, #{staffInfoPhone,jdbcType=CHAR}, 
       #{staffInfoEmail,jdbcType=VARCHAR}, #{staffInfoAddress,jdbcType=VARCHAR}, #{staffInfoMarrige,jdbcType=VARCHAR}, 
       #{staffInfoIdnum,jdbcType=VARCHAR}, #{staffInfoNowaddress,jdbcType=VARCHAR}, #{staffInfoNative,jdbcType=VARCHAR}, 
       #{staffInfoWantjob,jdbcType=VARCHAR}, #{staffInfoWantcorp,jdbcType=VARCHAR}, #{staffInfoWantwage,jdbcType=VARCHAR}, 
-      #{staffInfoGroupid,jdbcType=INTEGER}, #{staffInfoUpdatetime,jdbcType=TIMESTAMP}, 
-      #{staffInfoEdu,jdbcType=INTEGER}, #{staffInfoWage,jdbcType=INTEGER})
+      #{staffInfoGroupid,jdbcType=INTEGER}, #{staffInfoEdu,jdbcType=INTEGER}, #{staffInfoWage,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffInfo" useGeneratedKeys="true">
     insert into staff_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -120,9 +123,6 @@
       </if>
       <if test="staffInfoGroupid != null">
         staff_info_groupId,
-      </if>
-      <if test="staffInfoUpdatetime != null">
-        staff_info_updateTime,
       </if>
       <if test="staffInfoEdu != null">
         staff_info_edu,
@@ -189,9 +189,6 @@
       <if test="staffInfoGroupid != null">
         #{staffInfoGroupid,jdbcType=INTEGER},
       </if>
-      <if test="staffInfoUpdatetime != null">
-        #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
       <if test="staffInfoEdu != null">
         #{staffInfoEdu,jdbcType=INTEGER},
       </if>
@@ -200,6 +197,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.StaffInfo">
     update staff_info
     <set>
@@ -260,9 +258,6 @@
       <if test="staffInfoGroupid != null">
         staff_info_groupId = #{staffInfoGroupid,jdbcType=INTEGER},
       </if>
-      <if test="staffInfoUpdatetime != null">
-        staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
       <if test="staffInfoEdu != null">
         staff_info_edu = #{staffInfoEdu,jdbcType=INTEGER},
       </if>
@@ -272,6 +267,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.StaffInfo">
     update staff_info
     set staff_info_url = #{staffInfoUrl,jdbcType=VARCHAR},
@@ -293,9 +289,9 @@
       staff_info_wantCorp = #{staffInfoWantcorp,jdbcType=VARCHAR},
       staff_info_wantWage = #{staffInfoWantwage,jdbcType=VARCHAR},
       staff_info_groupId = #{staffInfoGroupid,jdbcType=INTEGER},
-      staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
       staff_info_edu = #{staffInfoEdu,jdbcType=INTEGER},
       staff_info_wage = #{staffInfoWage,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
 </mapper>

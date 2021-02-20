@@ -11,28 +11,31 @@
     <result column="staff_job_reason" jdbcType="VARCHAR" property="staffJobReason" />
     <result column="staff_info_updateTime" jdbcType="TIMESTAMP" property="staffInfoUpdatetime" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, staff_id, staff_job_duration, staff_job_corp, staff_job_job, staff_job_wage, 
     staff_job_reason, staff_info_updateTime
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff_job
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff_job
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffJob" useGeneratedKeys="true">
     insert into staff_job (staff_id, staff_job_duration, staff_job_corp, 
-      staff_job_job, staff_job_wage, staff_job_reason, 
-      staff_info_updateTime)
+      staff_job_job, staff_job_wage, staff_job_reason)
     values (#{staffId,jdbcType=INTEGER}, #{staffJobDuration,jdbcType=VARCHAR}, #{staffJobCorp,jdbcType=VARCHAR}, 
-      #{staffJobJob,jdbcType=VARCHAR}, #{staffJobWage,jdbcType=VARCHAR}, #{staffJobReason,jdbcType=VARCHAR}, 
-      #{staffInfoUpdatetime,jdbcType=TIMESTAMP})
+      #{staffJobJob,jdbcType=VARCHAR}, #{staffJobWage,jdbcType=VARCHAR}, #{staffJobReason,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffJob" useGeneratedKeys="true">
     insert into staff_job
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -54,9 +57,6 @@
       <if test="staffJobReason != null">
         staff_job_reason,
       </if>
-      <if test="staffInfoUpdatetime != null">
-        staff_info_updateTime,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="staffId != null">
@@ -77,11 +77,9 @@
       <if test="staffJobReason != null">
         #{staffJobReason,jdbcType=VARCHAR},
       </if>
-      <if test="staffInfoUpdatetime != null">
-        #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.StaffJob">
     update staff_job
     <set>
@@ -103,12 +101,10 @@
       <if test="staffJobReason != null">
         staff_job_reason = #{staffJobReason,jdbcType=VARCHAR},
       </if>
-      <if test="staffInfoUpdatetime != null">
-        staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.StaffJob">
     update staff_job
     set staff_id = #{staffId,jdbcType=INTEGER},
@@ -116,8 +112,7 @@
       staff_job_corp = #{staffJobCorp,jdbcType=VARCHAR},
       staff_job_job = #{staffJobJob,jdbcType=VARCHAR},
       staff_job_wage = #{staffJobWage,jdbcType=VARCHAR},
-      staff_job_reason = #{staffJobReason,jdbcType=VARCHAR},
-      staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP}
+      staff_job_reason = #{staffJobReason,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

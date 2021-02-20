@@ -13,22 +13,45 @@
   <sql id="Base_Column_List">
     id, group_id, account, `password`, auth, `name`, job
   </sql>
+
+  <!-- 通过主键查询用户信息 -->
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- 通过查询账号ID验证账号是否存在 -->
+  <select id="selectIdByAccount" resultType="java.lang.Integer">
+    select ifnull(
+        (select id
+        from user
+        where account = #{account,jdbcType=VARCHAR}), -1)
+  </select>
+
+  <!-- 通过账号查询密码 -->
+  <select id="selectAccountAndPassword" resultType="java.lang.String">
+    select `password`
+    from user
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+
+  <!-- 通过主键删除 -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!-- 插入一条用户信息 -->
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User" useGeneratedKeys="true">
     insert into user (group_id, account, `password`, 
       auth, `name`, job)
     values (#{groupId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{auth,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
   </insert>
+
+  <!-- 插入部分用户信息 -->
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User" useGeneratedKeys="true">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -72,6 +95,8 @@
       </if>
     </trim>
   </insert>
+
+  <!-- 通过主键修改部分用户信息 -->
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.User">
     update user
     <set>
@@ -96,6 +121,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 通过主键修改全部用户信息 -->
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.User">
     update user
     set group_id = #{groupId,jdbcType=INTEGER},
@@ -106,4 +133,18 @@
       job = #{job,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 通过主键修改用户权限 -->
+  <update id="updateAuthByPrimaryKey" parameterType="java.lang.Integer">
+    update user
+    set auth = #{auth,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updatePasswordById">
+    update user
+    set `password` = #{account,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
 </mapper>
