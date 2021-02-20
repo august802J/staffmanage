@@ -4,84 +4,240 @@
   <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.StaffEvaluation">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="staff_id" jdbcType="INTEGER" property="staffId" />
-    <result column="staff_abi_time" jdbcType="VARCHAR" property="staffAbiTime" />
-    <result column="staff_abi_abi" jdbcType="VARCHAR" property="staffAbiAbi" />
-    <result column="staff_abi_updateTime" jdbcType="TIMESTAMP" property="staffAbiUpdatetime" />
+    <result column="staff_eva_job" jdbcType="VARCHAR" property="staffEvaJob" />
+    <result column="staff_eva_manager" jdbcType="VARCHAR" property="staffEvaManager" />
+    <result column="staff_eva_score" jdbcType="VARCHAR" property="staffEvaScore" />
+    <result column="staff_eva_attitude" jdbcType="VARCHAR" property="staffEvaAttitude" />
+    <result column="staff_eva_complete" jdbcType="VARCHAR" property="staffEvaComplete" />
+    <result column="staff_eva_late" jdbcType="INTEGER" property="staffEvaLate" />
+    <result column="staff_eva_leave" jdbcType="INTEGER" property="staffEvaLeave" />
+    <result column="staff_eva_absent" jdbcType="INTEGER" property="staffEvaAbsent" />
+    <result column="staff_eva_coop" jdbcType="VARCHAR" property="staffEvaCoop" />
+    <result column="staff_eva_behavior" jdbcType="VARCHAR" property="staffEvaBehavior" />
+    <result column="staff_eva_relation" jdbcType="VARCHAR" property="staffEvaRelation" />
+    <result column="staff_eva_coopBehavior" jdbcType="VARCHAR" property="staffEvaCoopbehavior" />
+    <result column="staff_eva_connection" jdbcType="VARCHAR" property="staffEvaConnection" />
+    <result column="staff_eva_manageCop" jdbcType="VARCHAR" property="staffEvaManagecop" />
+    <result column="staff_eva_managerAtt" jdbcType="VARCHAR" property="staffEvaManageratt" />
+    <result column="staff_info_updateTime" jdbcType="TIMESTAMP" property="staffInfoUpdatetime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, staff_abi_time, staff_abi_abi, staff_abi_updateTime
+    id, staff_id, staff_eva_job, staff_eva_manager, staff_eva_score, staff_eva_attitude, 
+    staff_eva_complete, staff_eva_late, staff_eva_leave, staff_eva_absent, staff_eva_coop, 
+    staff_eva_behavior, staff_eva_relation, staff_eva_coopBehavior, staff_eva_connection, 
+    staff_eva_manageCop, staff_eva_managerAtt, staff_info_updateTime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from staff_ability
+    from staff_evaluation
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from staff_ability
+    delete from staff_evaluation
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation" useGeneratedKeys="true">
-    insert into staff_ability (staff_id, staff_abi_time, staff_abi_abi, 
-      staff_abi_updateTime)
-    values (#{staffId,jdbcType=INTEGER}, #{staffAbiTime,jdbcType=VARCHAR}, #{staffAbiAbi,jdbcType=VARCHAR}, 
-      #{staffAbiUpdatetime,jdbcType=TIMESTAMP})
+    insert into staff_evaluation (staff_id, staff_eva_job, staff_eva_manager, 
+      staff_eva_score, staff_eva_attitude, staff_eva_complete, 
+      staff_eva_late, staff_eva_leave, staff_eva_absent, 
+      staff_eva_coop, staff_eva_behavior, staff_eva_relation, 
+      staff_eva_coopBehavior, staff_eva_connection, 
+      staff_eva_manageCop, staff_eva_managerAtt, 
+      staff_info_updateTime)
+    values (#{staffId,jdbcType=INTEGER}, #{staffEvaJob,jdbcType=VARCHAR}, #{staffEvaManager,jdbcType=VARCHAR}, 
+      #{staffEvaScore,jdbcType=VARCHAR}, #{staffEvaAttitude,jdbcType=VARCHAR}, #{staffEvaComplete,jdbcType=VARCHAR}, 
+      #{staffEvaLate,jdbcType=INTEGER}, #{staffEvaLeave,jdbcType=INTEGER}, #{staffEvaAbsent,jdbcType=INTEGER}, 
+      #{staffEvaCoop,jdbcType=VARCHAR}, #{staffEvaBehavior,jdbcType=VARCHAR}, #{staffEvaRelation,jdbcType=VARCHAR}, 
+      #{staffEvaCoopbehavior,jdbcType=VARCHAR}, #{staffEvaConnection,jdbcType=VARCHAR}, 
+      #{staffEvaManagecop,jdbcType=VARCHAR}, #{staffEvaManageratt,jdbcType=VARCHAR}, 
+      #{staffInfoUpdatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation" useGeneratedKeys="true">
-    insert into staff_ability
+    insert into staff_evaluation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="staffId != null">
         staff_id,
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time,
+      <if test="staffEvaJob != null">
+        staff_eva_job,
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi,
+      <if test="staffEvaManager != null">
+        staff_eva_manager,
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime,
+      <if test="staffEvaScore != null">
+        staff_eva_score,
+      </if>
+      <if test="staffEvaAttitude != null">
+        staff_eva_attitude,
+      </if>
+      <if test="staffEvaComplete != null">
+        staff_eva_complete,
+      </if>
+      <if test="staffEvaLate != null">
+        staff_eva_late,
+      </if>
+      <if test="staffEvaLeave != null">
+        staff_eva_leave,
+      </if>
+      <if test="staffEvaAbsent != null">
+        staff_eva_absent,
+      </if>
+      <if test="staffEvaCoop != null">
+        staff_eva_coop,
+      </if>
+      <if test="staffEvaBehavior != null">
+        staff_eva_behavior,
+      </if>
+      <if test="staffEvaRelation != null">
+        staff_eva_relation,
+      </if>
+      <if test="staffEvaCoopbehavior != null">
+        staff_eva_coopBehavior,
+      </if>
+      <if test="staffEvaConnection != null">
+        staff_eva_connection,
+      </if>
+      <if test="staffEvaManagecop != null">
+        staff_eva_manageCop,
+      </if>
+      <if test="staffEvaManageratt != null">
+        staff_eva_managerAtt,
+      </if>
+      <if test="staffInfoUpdatetime != null">
+        staff_info_updateTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="staffId != null">
         #{staffId,jdbcType=INTEGER},
       </if>
-      <if test="staffAbiTime != null">
-        #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="staffEvaJob != null">
+        #{staffEvaJob,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="staffEvaManager != null">
+        #{staffEvaManager,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="staffEvaScore != null">
+        #{staffEvaScore,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaAttitude != null">
+        #{staffEvaAttitude,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaComplete != null">
+        #{staffEvaComplete,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaLate != null">
+        #{staffEvaLate,jdbcType=INTEGER},
+      </if>
+      <if test="staffEvaLeave != null">
+        #{staffEvaLeave,jdbcType=INTEGER},
+      </if>
+      <if test="staffEvaAbsent != null">
+        #{staffEvaAbsent,jdbcType=INTEGER},
+      </if>
+      <if test="staffEvaCoop != null">
+        #{staffEvaCoop,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaBehavior != null">
+        #{staffEvaBehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaRelation != null">
+        #{staffEvaRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaCoopbehavior != null">
+        #{staffEvaCoopbehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaConnection != null">
+        #{staffEvaConnection,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaManagecop != null">
+        #{staffEvaManagecop,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaManageratt != null">
+        #{staffEvaManageratt,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoUpdatetime != null">
+        #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation">
-    update staff_ability
+    update staff_evaluation
     <set>
       <if test="staffId != null">
         staff_id = #{staffId,jdbcType=INTEGER},
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="staffEvaJob != null">
+        staff_eva_job = #{staffEvaJob,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="staffEvaManager != null">
+        staff_eva_manager = #{staffEvaManager,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="staffEvaScore != null">
+        staff_eva_score = #{staffEvaScore,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaAttitude != null">
+        staff_eva_attitude = #{staffEvaAttitude,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaComplete != null">
+        staff_eva_complete = #{staffEvaComplete,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaLate != null">
+        staff_eva_late = #{staffEvaLate,jdbcType=INTEGER},
+      </if>
+      <if test="staffEvaLeave != null">
+        staff_eva_leave = #{staffEvaLeave,jdbcType=INTEGER},
+      </if>
+      <if test="staffEvaAbsent != null">
+        staff_eva_absent = #{staffEvaAbsent,jdbcType=INTEGER},
+      </if>
+      <if test="staffEvaCoop != null">
+        staff_eva_coop = #{staffEvaCoop,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaBehavior != null">
+        staff_eva_behavior = #{staffEvaBehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaRelation != null">
+        staff_eva_relation = #{staffEvaRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaCoopbehavior != null">
+        staff_eva_coopBehavior = #{staffEvaCoopbehavior,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaConnection != null">
+        staff_eva_connection = #{staffEvaConnection,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaManagecop != null">
+        staff_eva_manageCop = #{staffEvaManagecop,jdbcType=VARCHAR},
+      </if>
+      <if test="staffEvaManageratt != null">
+        staff_eva_managerAtt = #{staffEvaManageratt,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoUpdatetime != null">
+        staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation">
-    update staff_ability
+    update staff_evaluation
     set staff_id = #{staffId,jdbcType=INTEGER},
-      staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
-      staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
-      staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP}
+      staff_eva_job = #{staffEvaJob,jdbcType=VARCHAR},
+      staff_eva_manager = #{staffEvaManager,jdbcType=VARCHAR},
+      staff_eva_score = #{staffEvaScore,jdbcType=VARCHAR},
+      staff_eva_attitude = #{staffEvaAttitude,jdbcType=VARCHAR},
+      staff_eva_complete = #{staffEvaComplete,jdbcType=VARCHAR},
+      staff_eva_late = #{staffEvaLate,jdbcType=INTEGER},
+      staff_eva_leave = #{staffEvaLeave,jdbcType=INTEGER},
+      staff_eva_absent = #{staffEvaAbsent,jdbcType=INTEGER},
+      staff_eva_coop = #{staffEvaCoop,jdbcType=VARCHAR},
+      staff_eva_behavior = #{staffEvaBehavior,jdbcType=VARCHAR},
+      staff_eva_relation = #{staffEvaRelation,jdbcType=VARCHAR},
+      staff_eva_coopBehavior = #{staffEvaCoopbehavior,jdbcType=VARCHAR},
+      staff_eva_connection = #{staffEvaConnection,jdbcType=VARCHAR},
+      staff_eva_manageCop = #{staffEvaManagecop,jdbcType=VARCHAR},
+      staff_eva_managerAtt = #{staffEvaManageratt,jdbcType=VARCHAR},
+      staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

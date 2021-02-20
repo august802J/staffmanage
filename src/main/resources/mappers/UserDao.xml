@@ -3,85 +3,107 @@
 <mapper namespace="com.fanlu.staffmanage.dao.UserDao">
   <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
-    <result column="staff_abi_time" jdbcType="VARCHAR" property="staffAbiTime" />
-    <result column="staff_abi_abi" jdbcType="VARCHAR" property="staffAbiAbi" />
-    <result column="staff_abi_updateTime" jdbcType="TIMESTAMP" property="staffAbiUpdatetime" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="auth" jdbcType="INTEGER" property="auth" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, staff_abi_time, staff_abi_abi, staff_abi_updateTime
+    id, group_id, account, `password`, auth, `name`, job
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from staff_ability
+    from user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from staff_ability
+    delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User" useGeneratedKeys="true">
-    insert into staff_ability (staff_id, staff_abi_time, staff_abi_abi, 
-      staff_abi_updateTime)
-    values (#{staffId,jdbcType=INTEGER}, #{staffAbiTime,jdbcType=VARCHAR}, #{staffAbiAbi,jdbcType=VARCHAR}, 
-      #{staffAbiUpdatetime,jdbcType=TIMESTAMP})
+    insert into user (group_id, account, `password`, 
+      auth, `name`, job)
+    values (#{groupId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{auth,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User" useGeneratedKeys="true">
-    insert into staff_ability
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        staff_id,
+      <if test="groupId != null">
+        group_id,
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time,
+      <if test="account != null">
+        account,
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi,
+      <if test="password != null">
+        `password`,
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime,
+      <if test="auth != null">
+        auth,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="job != null">
+        job,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        #{staffId,jdbcType=INTEGER},
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
       </if>
-      <if test="staffAbiTime != null">
-        #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="auth != null">
+        #{auth,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.User">
-    update staff_ability
+    update user
     <set>
-      <if test="staffId != null">
-        staff_id = #{staffId,jdbcType=INTEGER},
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=INTEGER},
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="auth != null">
+        auth = #{auth,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.User">
-    update staff_ability
-    set staff_id = #{staffId,jdbcType=INTEGER},
-      staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
-      staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
-      staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP}
+    update user
+    set group_id = #{groupId,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      auth = #{auth,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

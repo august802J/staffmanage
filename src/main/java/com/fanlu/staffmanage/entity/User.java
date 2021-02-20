@@ -1,22 +1,25 @@
 package com.fanlu.staffmanage.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * staff_ability
+ * user
  * @author 
  */
 public class User implements Serializable {
     private Integer id;
 
-    private Integer staffId;
+    private Integer groupId;
 
-    private String staffAbiTime;
+    private String account;
 
-    private String staffAbiAbi;
+    private String password;
 
-    private Date staffAbiUpdatetime;
+    private Integer auth;
+
+    private String name;
+
+    private String job;
 
     private static final long serialVersionUID = 1L;
 
@@ -28,35 +31,51 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public Integer getStaffId() {
-        return staffId;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
-    public String getStaffAbiTime() {
-        return staffAbiTime;
+    public String getAccount() {
+        return account;
     }
 
-    public void setStaffAbiTime(String staffAbiTime) {
-        this.staffAbiTime = staffAbiTime;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    public String getStaffAbiAbi() {
-        return staffAbiAbi;
+    public String getPassword() {
+        return password;
     }
 
-    public void setStaffAbiAbi(String staffAbiAbi) {
-        this.staffAbiAbi = staffAbiAbi;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getStaffAbiUpdatetime() {
-        return staffAbiUpdatetime;
+    public Integer getAuth() {
+        return auth;
     }
 
-    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
-        this.staffAbiUpdatetime = staffAbiUpdatetime;
+    public void setAuth(Integer auth) {
+        this.auth = auth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 }

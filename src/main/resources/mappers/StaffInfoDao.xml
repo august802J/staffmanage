@@ -3,85 +3,299 @@
 <mapper namespace="com.fanlu.staffmanage.dao.StaffInfoDao">
   <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.StaffInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
-    <result column="staff_abi_time" jdbcType="VARCHAR" property="staffAbiTime" />
-    <result column="staff_abi_abi" jdbcType="VARCHAR" property="staffAbiAbi" />
-    <result column="staff_abi_updateTime" jdbcType="TIMESTAMP" property="staffAbiUpdatetime" />
+    <result column="staff_info_url" jdbcType="VARCHAR" property="staffInfoUrl" />
+    <result column="staff_info_name" jdbcType="VARCHAR" property="staffInfoName" />
+    <result column="staff_info_race" jdbcType="VARCHAR" property="staffInfoRace" />
+    <result column="staff_info_age" jdbcType="INTEGER" property="staffInfoAge" />
+    <result column="staff_info_sex" jdbcType="VARCHAR" property="staffInfoSex" />
+    <result column="staff_info_birth" jdbcType="VARCHAR" property="staffInfoBirth" />
+    <result column="staff_info_height" jdbcType="VARCHAR" property="staffInfoHeight" />
+    <result column="staff_info_party" jdbcType="VARCHAR" property="staffInfoParty" />
+    <result column="staff_info_phone" jdbcType="CHAR" property="staffInfoPhone" />
+    <result column="staff_info_email" jdbcType="VARCHAR" property="staffInfoEmail" />
+    <result column="staff_info_address" jdbcType="VARCHAR" property="staffInfoAddress" />
+    <result column="staff_info_marrige" jdbcType="VARCHAR" property="staffInfoMarrige" />
+    <result column="staff_info_idNum" jdbcType="VARCHAR" property="staffInfoIdnum" />
+    <result column="staff_info_nowAddress" jdbcType="VARCHAR" property="staffInfoNowaddress" />
+    <result column="staff_info_native" jdbcType="VARCHAR" property="staffInfoNative" />
+    <result column="staff_info_wantJob" jdbcType="VARCHAR" property="staffInfoWantjob" />
+    <result column="staff_info_wantCorp" jdbcType="VARCHAR" property="staffInfoWantcorp" />
+    <result column="staff_info_wantWage" jdbcType="VARCHAR" property="staffInfoWantwage" />
+    <result column="staff_info_groupId" jdbcType="INTEGER" property="staffInfoGroupid" />
+    <result column="staff_info_updateTime" jdbcType="TIMESTAMP" property="staffInfoUpdatetime" />
+    <result column="staff_info_edu" jdbcType="INTEGER" property="staffInfoEdu" />
+    <result column="staff_info_wage" jdbcType="INTEGER" property="staffInfoWage" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, staff_abi_time, staff_abi_abi, staff_abi_updateTime
+    id, staff_info_url, staff_info_name, staff_info_race, staff_info_age, staff_info_sex, 
+    staff_info_birth, staff_info_height, staff_info_party, staff_info_phone, staff_info_email, 
+    staff_info_address, staff_info_marrige, staff_info_idNum, staff_info_nowAddress, 
+    staff_info_native, staff_info_wantJob, staff_info_wantCorp, staff_info_wantWage, 
+    staff_info_groupId, staff_info_updateTime, staff_info_edu, staff_info_wage
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from staff_ability
+    from staff_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from staff_ability
+    delete from staff_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffInfo" useGeneratedKeys="true">
-    insert into staff_ability (staff_id, staff_abi_time, staff_abi_abi, 
-      staff_abi_updateTime)
-    values (#{staffId,jdbcType=INTEGER}, #{staffAbiTime,jdbcType=VARCHAR}, #{staffAbiAbi,jdbcType=VARCHAR}, 
-      #{staffAbiUpdatetime,jdbcType=TIMESTAMP})
+    insert into staff_info (staff_info_url, staff_info_name, staff_info_race, 
+      staff_info_age, staff_info_sex, staff_info_birth, 
+      staff_info_height, staff_info_party, staff_info_phone, 
+      staff_info_email, staff_info_address, staff_info_marrige, 
+      staff_info_idNum, staff_info_nowAddress, staff_info_native, 
+      staff_info_wantJob, staff_info_wantCorp, staff_info_wantWage, 
+      staff_info_groupId, staff_info_updateTime, 
+      staff_info_edu, staff_info_wage)
+    values (#{staffInfoUrl,jdbcType=VARCHAR}, #{staffInfoName,jdbcType=VARCHAR}, #{staffInfoRace,jdbcType=VARCHAR}, 
+      #{staffInfoAge,jdbcType=INTEGER}, #{staffInfoSex,jdbcType=VARCHAR}, #{staffInfoBirth,jdbcType=VARCHAR}, 
+      #{staffInfoHeight,jdbcType=VARCHAR}, #{staffInfoParty,jdbcType=VARCHAR}, #{staffInfoPhone,jdbcType=CHAR}, 
+      #{staffInfoEmail,jdbcType=VARCHAR}, #{staffInfoAddress,jdbcType=VARCHAR}, #{staffInfoMarrige,jdbcType=VARCHAR}, 
+      #{staffInfoIdnum,jdbcType=VARCHAR}, #{staffInfoNowaddress,jdbcType=VARCHAR}, #{staffInfoNative,jdbcType=VARCHAR}, 
+      #{staffInfoWantjob,jdbcType=VARCHAR}, #{staffInfoWantcorp,jdbcType=VARCHAR}, #{staffInfoWantwage,jdbcType=VARCHAR}, 
+      #{staffInfoGroupid,jdbcType=INTEGER}, #{staffInfoUpdatetime,jdbcType=TIMESTAMP}, 
+      #{staffInfoEdu,jdbcType=INTEGER}, #{staffInfoWage,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffInfo" useGeneratedKeys="true">
-    insert into staff_ability
+    insert into staff_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        staff_id,
+      <if test="staffInfoUrl != null">
+        staff_info_url,
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time,
+      <if test="staffInfoName != null">
+        staff_info_name,
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi,
+      <if test="staffInfoRace != null">
+        staff_info_race,
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime,
+      <if test="staffInfoAge != null">
+        staff_info_age,
+      </if>
+      <if test="staffInfoSex != null">
+        staff_info_sex,
+      </if>
+      <if test="staffInfoBirth != null">
+        staff_info_birth,
+      </if>
+      <if test="staffInfoHeight != null">
+        staff_info_height,
+      </if>
+      <if test="staffInfoParty != null">
+        staff_info_party,
+      </if>
+      <if test="staffInfoPhone != null">
+        staff_info_phone,
+      </if>
+      <if test="staffInfoEmail != null">
+        staff_info_email,
+      </if>
+      <if test="staffInfoAddress != null">
+        staff_info_address,
+      </if>
+      <if test="staffInfoMarrige != null">
+        staff_info_marrige,
+      </if>
+      <if test="staffInfoIdnum != null">
+        staff_info_idNum,
+      </if>
+      <if test="staffInfoNowaddress != null">
+        staff_info_nowAddress,
+      </if>
+      <if test="staffInfoNative != null">
+        staff_info_native,
+      </if>
+      <if test="staffInfoWantjob != null">
+        staff_info_wantJob,
+      </if>
+      <if test="staffInfoWantcorp != null">
+        staff_info_wantCorp,
+      </if>
+      <if test="staffInfoWantwage != null">
+        staff_info_wantWage,
+      </if>
+      <if test="staffInfoGroupid != null">
+        staff_info_groupId,
+      </if>
+      <if test="staffInfoUpdatetime != null">
+        staff_info_updateTime,
+      </if>
+      <if test="staffInfoEdu != null">
+        staff_info_edu,
+      </if>
+      <if test="staffInfoWage != null">
+        staff_info_wage,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        #{staffId,jdbcType=INTEGER},
+      <if test="staffInfoUrl != null">
+        #{staffInfoUrl,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiTime != null">
-        #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="staffInfoName != null">
+        #{staffInfoName,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="staffInfoRace != null">
+        #{staffInfoRace,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="staffInfoAge != null">
+        #{staffInfoAge,jdbcType=INTEGER},
+      </if>
+      <if test="staffInfoSex != null">
+        #{staffInfoSex,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoBirth != null">
+        #{staffInfoBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoHeight != null">
+        #{staffInfoHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoParty != null">
+        #{staffInfoParty,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoPhone != null">
+        #{staffInfoPhone,jdbcType=CHAR},
+      </if>
+      <if test="staffInfoEmail != null">
+        #{staffInfoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoAddress != null">
+        #{staffInfoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoMarrige != null">
+        #{staffInfoMarrige,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoIdnum != null">
+        #{staffInfoIdnum,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoNowaddress != null">
+        #{staffInfoNowaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoNative != null">
+        #{staffInfoNative,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoWantjob != null">
+        #{staffInfoWantjob,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoWantcorp != null">
+        #{staffInfoWantcorp,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoWantwage != null">
+        #{staffInfoWantwage,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoGroupid != null">
+        #{staffInfoGroupid,jdbcType=INTEGER},
+      </if>
+      <if test="staffInfoUpdatetime != null">
+        #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffInfoEdu != null">
+        #{staffInfoEdu,jdbcType=INTEGER},
+      </if>
+      <if test="staffInfoWage != null">
+        #{staffInfoWage,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.StaffInfo">
-    update staff_ability
+    update staff_info
     <set>
-      <if test="staffId != null">
-        staff_id = #{staffId,jdbcType=INTEGER},
+      <if test="staffInfoUrl != null">
+        staff_info_url = #{staffInfoUrl,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="staffInfoName != null">
+        staff_info_name = #{staffInfoName,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="staffInfoRace != null">
+        staff_info_race = #{staffInfoRace,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="staffInfoAge != null">
+        staff_info_age = #{staffInfoAge,jdbcType=INTEGER},
+      </if>
+      <if test="staffInfoSex != null">
+        staff_info_sex = #{staffInfoSex,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoBirth != null">
+        staff_info_birth = #{staffInfoBirth,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoHeight != null">
+        staff_info_height = #{staffInfoHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoParty != null">
+        staff_info_party = #{staffInfoParty,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoPhone != null">
+        staff_info_phone = #{staffInfoPhone,jdbcType=CHAR},
+      </if>
+      <if test="staffInfoEmail != null">
+        staff_info_email = #{staffInfoEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoAddress != null">
+        staff_info_address = #{staffInfoAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoMarrige != null">
+        staff_info_marrige = #{staffInfoMarrige,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoIdnum != null">
+        staff_info_idNum = #{staffInfoIdnum,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoNowaddress != null">
+        staff_info_nowAddress = #{staffInfoNowaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoNative != null">
+        staff_info_native = #{staffInfoNative,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoWantjob != null">
+        staff_info_wantJob = #{staffInfoWantjob,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoWantcorp != null">
+        staff_info_wantCorp = #{staffInfoWantcorp,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoWantwage != null">
+        staff_info_wantWage = #{staffInfoWantwage,jdbcType=VARCHAR},
+      </if>
+      <if test="staffInfoGroupid != null">
+        staff_info_groupId = #{staffInfoGroupid,jdbcType=INTEGER},
+      </if>
+      <if test="staffInfoUpdatetime != null">
+        staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="staffInfoEdu != null">
+        staff_info_edu = #{staffInfoEdu,jdbcType=INTEGER},
+      </if>
+      <if test="staffInfoWage != null">
+        staff_info_wage = #{staffInfoWage,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.StaffInfo">
-    update staff_ability
-    set staff_id = #{staffId,jdbcType=INTEGER},
-      staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
-      staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
-      staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP}
+    update staff_info
+    set staff_info_url = #{staffInfoUrl,jdbcType=VARCHAR},
+      staff_info_name = #{staffInfoName,jdbcType=VARCHAR},
+      staff_info_race = #{staffInfoRace,jdbcType=VARCHAR},
+      staff_info_age = #{staffInfoAge,jdbcType=INTEGER},
+      staff_info_sex = #{staffInfoSex,jdbcType=VARCHAR},
+      staff_info_birth = #{staffInfoBirth,jdbcType=VARCHAR},
+      staff_info_height = #{staffInfoHeight,jdbcType=VARCHAR},
+      staff_info_party = #{staffInfoParty,jdbcType=VARCHAR},
+      staff_info_phone = #{staffInfoPhone,jdbcType=CHAR},
+      staff_info_email = #{staffInfoEmail,jdbcType=VARCHAR},
+      staff_info_address = #{staffInfoAddress,jdbcType=VARCHAR},
+      staff_info_marrige = #{staffInfoMarrige,jdbcType=VARCHAR},
+      staff_info_idNum = #{staffInfoIdnum,jdbcType=VARCHAR},
+      staff_info_nowAddress = #{staffInfoNowaddress,jdbcType=VARCHAR},
+      staff_info_native = #{staffInfoNative,jdbcType=VARCHAR},
+      staff_info_wantJob = #{staffInfoWantjob,jdbcType=VARCHAR},
+      staff_info_wantCorp = #{staffInfoWantcorp,jdbcType=VARCHAR},
+      staff_info_wantWage = #{staffInfoWantwage,jdbcType=VARCHAR},
+      staff_info_groupId = #{staffInfoGroupid,jdbcType=INTEGER},
+      staff_info_updateTime = #{staffInfoUpdatetime,jdbcType=TIMESTAMP},
+      staff_info_edu = #{staffInfoEdu,jdbcType=INTEGER},
+      staff_info_wage = #{staffInfoWage,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

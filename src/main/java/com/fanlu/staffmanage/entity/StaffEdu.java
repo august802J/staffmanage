@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * staff_ability
+ * staff_edu
  * @author 
  */
 public class StaffEdu implements Serializable {
@@ -12,11 +12,11 @@ public class StaffEdu implements Serializable {
 
     private Integer staffId;
 
-    private String staffAbiTime;
+    private String staffEduDuration;
 
-    private String staffAbiAbi;
+    private String staffEduExp;
 
-    private Date staffAbiUpdatetime;
+    private Date staffEduUpdatetime;
 
     private static final long serialVersionUID = 1L;
 
@@ -36,27 +36,27 @@ public class StaffEdu implements Serializable {
         this.staffId = staffId;
     }
 
-    public String getStaffAbiTime() {
-        return staffAbiTime;
+    public String getStaffEduDuration() {
+        return staffEduDuration;
     }
 
-    public void setStaffAbiTime(String staffAbiTime) {
-        this.staffAbiTime = staffAbiTime;
+    public void setStaffEduDuration(String staffEduDuration) {
+        this.staffEduDuration = staffEduDuration;
     }
 
-    public String getStaffAbiAbi() {
-        return staffAbiAbi;
+    public String getStaffEduExp() {
+        return staffEduExp;
     }
 
-    public void setStaffAbiAbi(String staffAbiAbi) {
-        this.staffAbiAbi = staffAbiAbi;
+    public void setStaffEduExp(String staffEduExp) {
+        this.staffEduExp = staffEduExp;
     }
 
-    public Date getStaffAbiUpdatetime() {
-        return staffAbiUpdatetime;
+    public Date getStaffEduUpdatetime() {
+        return staffEduUpdatetime;
     }
 
-    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
-        this.staffAbiUpdatetime = staffAbiUpdatetime;
+    public void setStaffEduUpdatetime(Date staffEduUpdatetime) {
+        this.staffEduUpdatetime = staffEduUpdatetime;
     }
 }

@@ -1,22 +1,43 @@
 package com.fanlu.staffmanage.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * staff_ability
+ * user_coop
  * @author 
  */
 public class UserCoop implements Serializable {
     private Integer id;
 
-    private Integer staffId;
+    private String userCoopName;
 
-    private String staffAbiTime;
+    private String userCoopIcp;
 
-    private String staffAbiAbi;
+    private String userCoopAddr;
 
-    private Date staffAbiUpdatetime;
+    private String userCoopRage;
+
+    private String userCoopKind;
+
+    private String userCoopNum;
+
+    private String userPerName;
+
+    private String userPerJob;
+
+    private String userPerIdkind;
+
+    private String userPerId;
+
+    private String userPerPhone;
+
+    private String userPerIdurl;
+
+    private String userCoopJpgurl;
+
+    private String userCoopLogourl;
+
+    private Byte userCoopIscheck;
 
     private static final long serialVersionUID = 1L;
 
@@ -28,35 +49,123 @@ public class UserCoop implements Serializable {
         this.id = id;
     }
 
-    public Integer getStaffId() {
-        return staffId;
+    public String getUserCoopName() {
+        return userCoopName;
     }
 
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
+    public void setUserCoopName(String userCoopName) {
+        this.userCoopName = userCoopName;
     }
 
-    public String getStaffAbiTime() {
-        return staffAbiTime;
+    public String getUserCoopIcp() {
+        return userCoopIcp;
     }
 
-    public void setStaffAbiTime(String staffAbiTime) {
-        this.staffAbiTime = staffAbiTime;
+    public void setUserCoopIcp(String userCoopIcp) {
+        this.userCoopIcp = userCoopIcp;
     }
 
-    public String getStaffAbiAbi() {
-        return staffAbiAbi;
+    public String getUserCoopAddr() {
+        return userCoopAddr;
     }
 
-    public void setStaffAbiAbi(String staffAbiAbi) {
-        this.staffAbiAbi = staffAbiAbi;
+    public void setUserCoopAddr(String userCoopAddr) {
+        this.userCoopAddr = userCoopAddr;
     }
 
-    public Date getStaffAbiUpdatetime() {
-        return staffAbiUpdatetime;
+    public String getUserCoopRage() {
+        return userCoopRage;
     }
 
-    public void setStaffAbiUpdatetime(Date staffAbiUpdatetime) {
-        this.staffAbiUpdatetime = staffAbiUpdatetime;
+    public void setUserCoopRage(String userCoopRage) {
+        this.userCoopRage = userCoopRage;
+    }
+
+    public String getUserCoopKind() {
+        return userCoopKind;
+    }
+
+    public void setUserCoopKind(String userCoopKind) {
+        this.userCoopKind = userCoopKind;
+    }
+
+    public String getUserCoopNum() {
+        return userCoopNum;
+    }
+
+    public void setUserCoopNum(String userCoopNum) {
+        this.userCoopNum = userCoopNum;
+    }
+
+    public String getUserPerName() {
+        return userPerName;
+    }
+
+    public void setUserPerName(String userPerName) {
+        this.userPerName = userPerName;
+    }
+
+    public String getUserPerJob() {
+        return userPerJob;
+    }
+
+    public void setUserPerJob(String userPerJob) {
+        this.userPerJob = userPerJob;
+    }
+
+    public String getUserPerIdkind() {
+        return userPerIdkind;
+    }
+
+    public void setUserPerIdkind(String userPerIdkind) {
+        this.userPerIdkind = userPerIdkind;
+    }
+
+    public String getUserPerId() {
+        return userPerId;
+    }
+
+    public void setUserPerId(String userPerId) {
+        this.userPerId = userPerId;
+    }
+
+    public String getUserPerPhone() {
+        return userPerPhone;
+    }
+
+    public void setUserPerPhone(String userPerPhone) {
+        this.userPerPhone = userPerPhone;
+    }
+
+    public String getUserPerIdurl() {
+        return userPerIdurl;
+    }
+
+    public void setUserPerIdurl(String userPerIdurl) {
+        this.userPerIdurl = userPerIdurl;
+    }
+
+    public String getUserCoopJpgurl() {
+        return userCoopJpgurl;
+    }
+
+    public void setUserCoopJpgurl(String userCoopJpgurl) {
+        this.userCoopJpgurl = userCoopJpgurl;
+    }
+
+    public String getUserCoopLogourl() {
+        return userCoopLogourl;
+    }
+
+    public void setUserCoopLogourl(String userCoopLogourl) {
+        this.userCoopLogourl = userCoopLogourl;
+    }
+
+    public Byte getUserCoopIscheck() {
+        return userCoopIscheck;
+    }
+
+    public void setUserCoopIscheck(Byte userCoopIscheck) {
+        this.userCoopIscheck = userCoopIscheck;
     }
 }

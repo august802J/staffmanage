@@ -3,85 +3,216 @@
 <mapper namespace="com.fanlu.staffmanage.dao.UserCoopDao">
   <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.UserCoop">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
-    <result column="staff_abi_time" jdbcType="VARCHAR" property="staffAbiTime" />
-    <result column="staff_abi_abi" jdbcType="VARCHAR" property="staffAbiAbi" />
-    <result column="staff_abi_updateTime" jdbcType="TIMESTAMP" property="staffAbiUpdatetime" />
+    <result column="user_coop_name" jdbcType="VARCHAR" property="userCoopName" />
+    <result column="user_coop_icp" jdbcType="VARCHAR" property="userCoopIcp" />
+    <result column="user_coop_addr" jdbcType="VARCHAR" property="userCoopAddr" />
+    <result column="user_coop_rage" jdbcType="VARCHAR" property="userCoopRage" />
+    <result column="user_coop_kind" jdbcType="VARCHAR" property="userCoopKind" />
+    <result column="user_coop_num" jdbcType="VARCHAR" property="userCoopNum" />
+    <result column="user_per_name" jdbcType="VARCHAR" property="userPerName" />
+    <result column="user_per_job" jdbcType="VARCHAR" property="userPerJob" />
+    <result column="user_per_idKind" jdbcType="VARCHAR" property="userPerIdkind" />
+    <result column="user_per_id" jdbcType="VARCHAR" property="userPerId" />
+    <result column="user_per_phone" jdbcType="VARCHAR" property="userPerPhone" />
+    <result column="user_per_idUrl" jdbcType="VARCHAR" property="userPerIdurl" />
+    <result column="user_coop_jpgUrl" jdbcType="VARCHAR" property="userCoopJpgurl" />
+    <result column="user_coop_logoUrl" jdbcType="VARCHAR" property="userCoopLogourl" />
+    <result column="user_coop_isCheck" jdbcType="TINYINT" property="userCoopIscheck" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, staff_id, staff_abi_time, staff_abi_abi, staff_abi_updateTime
+    id, user_coop_name, user_coop_icp, user_coop_addr, user_coop_rage, user_coop_kind, 
+    user_coop_num, user_per_name, user_per_job, user_per_idKind, user_per_id, user_per_phone, 
+    user_per_idUrl, user_coop_jpgUrl, user_coop_logoUrl, user_coop_isCheck
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from staff_ability
+    from user_coop
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from staff_ability
+    delete from user_coop
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.UserCoop" useGeneratedKeys="true">
-    insert into staff_ability (staff_id, staff_abi_time, staff_abi_abi, 
-      staff_abi_updateTime)
-    values (#{staffId,jdbcType=INTEGER}, #{staffAbiTime,jdbcType=VARCHAR}, #{staffAbiAbi,jdbcType=VARCHAR}, 
-      #{staffAbiUpdatetime,jdbcType=TIMESTAMP})
+    insert into user_coop (user_coop_name, user_coop_icp, user_coop_addr, 
+      user_coop_rage, user_coop_kind, user_coop_num, 
+      user_per_name, user_per_job, user_per_idKind, 
+      user_per_id, user_per_phone, user_per_idUrl, 
+      user_coop_jpgUrl, user_coop_logoUrl, user_coop_isCheck
+      )
+    values (#{userCoopName,jdbcType=VARCHAR}, #{userCoopIcp,jdbcType=VARCHAR}, #{userCoopAddr,jdbcType=VARCHAR}, 
+      #{userCoopRage,jdbcType=VARCHAR}, #{userCoopKind,jdbcType=VARCHAR}, #{userCoopNum,jdbcType=VARCHAR}, 
+      #{userPerName,jdbcType=VARCHAR}, #{userPerJob,jdbcType=VARCHAR}, #{userPerIdkind,jdbcType=VARCHAR}, 
+      #{userPerId,jdbcType=VARCHAR}, #{userPerPhone,jdbcType=VARCHAR}, #{userPerIdurl,jdbcType=VARCHAR}, 
+      #{userCoopJpgurl,jdbcType=VARCHAR}, #{userCoopLogourl,jdbcType=VARCHAR}, #{userCoopIscheck,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.UserCoop" useGeneratedKeys="true">
-    insert into staff_ability
+    insert into user_coop
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        staff_id,
+      <if test="userCoopName != null">
+        user_coop_name,
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time,
+      <if test="userCoopIcp != null">
+        user_coop_icp,
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi,
+      <if test="userCoopAddr != null">
+        user_coop_addr,
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime,
+      <if test="userCoopRage != null">
+        user_coop_rage,
+      </if>
+      <if test="userCoopKind != null">
+        user_coop_kind,
+      </if>
+      <if test="userCoopNum != null">
+        user_coop_num,
+      </if>
+      <if test="userPerName != null">
+        user_per_name,
+      </if>
+      <if test="userPerJob != null">
+        user_per_job,
+      </if>
+      <if test="userPerIdkind != null">
+        user_per_idKind,
+      </if>
+      <if test="userPerId != null">
+        user_per_id,
+      </if>
+      <if test="userPerPhone != null">
+        user_per_phone,
+      </if>
+      <if test="userPerIdurl != null">
+        user_per_idUrl,
+      </if>
+      <if test="userCoopJpgurl != null">
+        user_coop_jpgUrl,
+      </if>
+      <if test="userCoopLogourl != null">
+        user_coop_logoUrl,
+      </if>
+      <if test="userCoopIscheck != null">
+        user_coop_isCheck,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        #{staffId,jdbcType=INTEGER},
+      <if test="userCoopName != null">
+        #{userCoopName,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiTime != null">
-        #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="userCoopIcp != null">
+        #{userCoopIcp,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="userCoopAddr != null">
+        #{userCoopAddr,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="userCoopRage != null">
+        #{userCoopRage,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopKind != null">
+        #{userCoopKind,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopNum != null">
+        #{userCoopNum,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerName != null">
+        #{userPerName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerJob != null">
+        #{userPerJob,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerIdkind != null">
+        #{userPerIdkind,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerId != null">
+        #{userPerId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerPhone != null">
+        #{userPerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerIdurl != null">
+        #{userPerIdurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopJpgurl != null">
+        #{userCoopJpgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopLogourl != null">
+        #{userCoopLogourl,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopIscheck != null">
+        #{userCoopIscheck,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.UserCoop">
-    update staff_ability
+    update user_coop
     <set>
-      <if test="staffId != null">
-        staff_id = #{staffId,jdbcType=INTEGER},
+      <if test="userCoopName != null">
+        user_coop_name = #{userCoopName,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiTime != null">
-        staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
+      <if test="userCoopIcp != null">
+        user_coop_icp = #{userCoopIcp,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiAbi != null">
-        staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
+      <if test="userCoopAddr != null">
+        user_coop_addr = #{userCoopAddr,jdbcType=VARCHAR},
       </if>
-      <if test="staffAbiUpdatetime != null">
-        staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP},
+      <if test="userCoopRage != null">
+        user_coop_rage = #{userCoopRage,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopKind != null">
+        user_coop_kind = #{userCoopKind,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopNum != null">
+        user_coop_num = #{userCoopNum,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerName != null">
+        user_per_name = #{userPerName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerJob != null">
+        user_per_job = #{userPerJob,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerIdkind != null">
+        user_per_idKind = #{userPerIdkind,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerId != null">
+        user_per_id = #{userPerId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerPhone != null">
+        user_per_phone = #{userPerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userPerIdurl != null">
+        user_per_idUrl = #{userPerIdurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopJpgurl != null">
+        user_coop_jpgUrl = #{userCoopJpgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopLogourl != null">
+        user_coop_logoUrl = #{userCoopLogourl,jdbcType=VARCHAR},
+      </if>
+      <if test="userCoopIscheck != null">
+        user_coop_isCheck = #{userCoopIscheck,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.UserCoop">
-    update staff_ability
-    set staff_id = #{staffId,jdbcType=INTEGER},
-      staff_abi_time = #{staffAbiTime,jdbcType=VARCHAR},
-      staff_abi_abi = #{staffAbiAbi,jdbcType=VARCHAR},
-      staff_abi_updateTime = #{staffAbiUpdatetime,jdbcType=TIMESTAMP}
+    update user_coop
+    set user_coop_name = #{userCoopName,jdbcType=VARCHAR},
+      user_coop_icp = #{userCoopIcp,jdbcType=VARCHAR},
+      user_coop_addr = #{userCoopAddr,jdbcType=VARCHAR},
+      user_coop_rage = #{userCoopRage,jdbcType=VARCHAR},
+      user_coop_kind = #{userCoopKind,jdbcType=VARCHAR},
+      user_coop_num = #{userCoopNum,jdbcType=VARCHAR},
+      user_per_name = #{userPerName,jdbcType=VARCHAR},
+      user_per_job = #{userPerJob,jdbcType=VARCHAR},
+      user_per_idKind = #{userPerIdkind,jdbcType=VARCHAR},
+      user_per_id = #{userPerId,jdbcType=VARCHAR},
+      user_per_phone = #{userPerPhone,jdbcType=VARCHAR},
+      user_per_idUrl = #{userPerIdurl,jdbcType=VARCHAR},
+      user_coop_jpgUrl = #{userCoopJpgurl,jdbcType=VARCHAR},
+      user_coop_logoUrl = #{userCoopLogourl,jdbcType=VARCHAR},
+      user_coop_isCheck = #{userCoopIscheck,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
