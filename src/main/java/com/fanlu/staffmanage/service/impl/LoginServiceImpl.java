@@ -1,9 +1,11 @@
 package com.fanlu.staffmanage.service.impl;
 
+import com.fanlu.staffmanage.dao.UserCoopDao;
 import com.fanlu.staffmanage.dao.UserDao;
 import com.fanlu.staffmanage.dto.Inc;
 import com.fanlu.staffmanage.entity.User;
-import com.fanlu.staffmanage.service.UserService;
+import com.fanlu.staffmanage.entity.UserCoop;
+import com.fanlu.staffmanage.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,20 @@ import org.springframework.stereotype.Service;
  * @Author 15011_
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private UserCoopDao userCoopDao;
+
+    @Override
+    public int addUserCoop(Inc inc) {
+        UserCoop userCoop = new UserCoop(inc);
+        userCoopDao.insertSelective(userCoop);
+        return userCoop.getId();
+    }
 
     @Override
     public boolean updatePassword(String account, String newPassword) {
@@ -36,8 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int addUser(User user, Inc inc) {
-        UserCoopServiceImpl userCoopService = new UserCoopServiceImpl();
-        int groupId = userCoopService.addUserCoop(inc);
+        int groupId = addUserCoop(inc);
         user.setGroupId(groupId);
         userDao.insertSelective(user);
         return user.getId();

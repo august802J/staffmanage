@@ -3,7 +3,7 @@ package com.fanlu.staffmanage.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.fanlu.staffmanage.dto.Inc;
 import com.fanlu.staffmanage.entity.User;
-import com.fanlu.staffmanage.service.impl.UserServiceImpl;
+import com.fanlu.staffmanage.service.impl.LoginServiceImpl;
 import com.fanlu.staffmanage.utils.Constant;
 import com.fanlu.staffmanage.utils.Message;
 import org.apache.shiro.SecurityUtils;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    UserServiceImpl userService;
+    LoginServiceImpl loginService;
 
     @PostMapping("/login")
     public void login(String account, String password) {
@@ -52,7 +52,7 @@ public class LoginController {
         }
 
         User user = new User(account, password);
-        int id = userService.addUser(user, incObject);
+        int id = loginService.addUser(user, incObject);
         return Message.success();
     }
 
@@ -61,7 +61,7 @@ public class LoginController {
         if(null == account || account.length() != Constant.ACCOUNT_LENGTH) {
             return Message.fail(628, "请求格式错误");
         }
-        if (userService.checkIsAccount(account)) {
+        if (loginService.checkIsAccount(account)) {
             return Message.fail(626, "账号不存在");
         } else {
             return Message.success();
@@ -75,7 +75,7 @@ public class LoginController {
                 || pwd.length() > Constant.PASSWORD_MAX_LENGTH) {
             return Message.fail(628, "请求格式错误");
         }
-        if (userService.updatePassword(account, pwd)) {
+        if (loginService.updatePassword(account, pwd)) {
             return Message.success();
         } else {
             return Message.fail();

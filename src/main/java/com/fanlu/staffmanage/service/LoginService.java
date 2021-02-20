@@ -10,7 +10,14 @@ import com.fanlu.staffmanage.entity.UserCoop;
  *
  * @Author 15011_
  */
-public interface UserService {
+public interface LoginService {
+    /**
+     * 添加一个公司信息
+     * @param inc
+     * @return 公司信息 ID
+     */
+    int addUserCoop(Inc inc);
+
     /**
      * 通过账号修改密码
      * @param account
