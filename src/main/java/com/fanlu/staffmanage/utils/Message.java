@@ -1,5 +1,7 @@
 package com.fanlu.staffmanage.utils;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,5 +136,14 @@ public class Message {
         message.setStatus(status);
         message.setStatusInfo(error, exception.toString());
         return message;
+    }
+
+    /**
+     * 将 Message 类转换为 JSONObject 类进行前后端交互
+     * @return
+     */
+    public JSONObject toJsonObject() {
+        String jsonStr = JSONObject.toJSONString(this);
+        return JSONObject.parseObject(jsonStr);
     }
 }

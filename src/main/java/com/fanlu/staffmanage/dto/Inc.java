@@ -1,5 +1,7 @@
 package com.fanlu.staffmanage.dto;
 
+import com.fanlu.staffmanage.entity.UserCoop;
+
 /**
  * Created by YGwhere on 2021/2/11 14:33
  * Description: staffmanage
@@ -7,6 +9,9 @@ package com.fanlu.staffmanage.dto;
  * @Author 15011_
  */
 public class Inc {
+    private int groupId;
+    private String icpUrl;
+    private String idUrl;
     private String inc_name;
     private String inc_icp;
     private String inc_place;
@@ -20,6 +25,27 @@ public class Inc {
     private String legal_phone;
 
     public Inc() {
+    }
+
+    /**
+     * 将 UserCoop 类转换成 Inc 类
+     * @param userCoop
+     */
+    public Inc(UserCoop userCoop) {
+        this.groupId = userCoop.getId();
+        this.icpUrl = userCoop.getUserCoopJpgurl();
+        this.idUrl = userCoop.getUserPerIdurl();
+        this.inc_name = userCoop.getUserCoopName();
+        this.inc_icp = userCoop.getUserCoopIcp();
+        this.inc_place = userCoop.getUserCoopAddr();
+        this.inc_rage = userCoop.getUserCoopRage();
+        this.kind = userCoop.getUserCoopKind();
+        this.inc_count = userCoop.getUserCoopNum();
+        this.legal_name = userCoop.getUserPerName();
+        this.legal_job = userCoop.getUserPerJob();
+        this.legal_idkind = userCoop.getUserPerIdkind();
+        this.legal_id = userCoop.getUserPerId();
+        this.legal_phone = userCoop.getUserPerPhone();
     }
 
     /**

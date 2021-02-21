@@ -56,6 +56,10 @@ spring:
         max-idle: 10
         min-idle: 2
     timeout: 6000
+  mvc:
+    view:
+      prefix: /static/
+      suffix: .html
 
 mybatis:
   mapper-locations: classpath:mappers/*xml
@@ -70,9 +74,10 @@ pagehelper:
 shiro:
   sessionManager:
     sessionIdCookieEnabled: true
-    sessionIdUrlRewritingEnabled: true
+    sessionIdUrlRewritingEnabled: false
+  web:
+    enabled: true
   # 根据目录确定
-  unauthorizedUrl: login
-  successUrl: /index
+  unauthorizedUrl: /error
+  successUrl: /success
   loginUrl: /login
-

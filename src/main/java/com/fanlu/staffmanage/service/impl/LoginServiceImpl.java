@@ -55,12 +55,18 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public int checkUser(String account, String password) {
+    public String checkUser(String account) {
         String pwd = userDao.selectAccountAndPassword(account);
-        if(!password.equals(pwd)) {
-            return -1;
+        if(null == pwd || "".equals(pwd)) {
+            return null;
         } else {
-            return userDao.selectIdByAccount(account);
+            return pwd;
         }
+    }
+
+    @Override
+    public int checkUserAuth(String account) {
+        int auth = userDao.selectAuthByAccount(account);
+        return auth;
     }
 }

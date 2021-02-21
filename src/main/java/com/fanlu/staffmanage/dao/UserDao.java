@@ -57,7 +57,7 @@ public interface UserDao {
      * @param auth
      * @return
      */
-    int updateAuthByPrimaryKey(@Param("id") Integer id, @Param("auth") Integer auth);
+    boolean updateAuthByPrimaryKey(@Param("id") Integer id, @Param("auth") Integer auth);
 
     /**
      * 通过查询账号ID验证账号是否存在
@@ -80,4 +80,11 @@ public interface UserDao {
      * @return
      */
     boolean updatePasswordById(Integer id, String password);
+
+    /**
+     * 通过账号搜索权限
+     * @param account
+     * @return
+     */
+    int selectAuthByAccount(String account);
 }

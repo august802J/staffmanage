@@ -2,7 +2,6 @@ package com.fanlu.staffmanage.service;
 
 import com.fanlu.staffmanage.dto.Inc;
 import com.fanlu.staffmanage.entity.User;
-import com.fanlu.staffmanage.entity.UserCoop;
 
 /**
  * Created by YGwhere on 2021/2/20 16:51
@@ -43,8 +42,14 @@ public interface LoginService {
     /**
      * 验证账号与密码是否对应
      * @param account
-     * @param password
      * @return
      */
-    int checkUser(String account, String password);
+    String checkUser(String account);
+
+    /**
+     * 检验账号的权限
+     * @param account
+     * @return
+     */
+    int checkUserAuth(String account);
 }
