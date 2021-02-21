@@ -3,7 +3,7 @@ package com.fanlu.staffmanage.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fanlu.staffmanage.dto.Inc;
-import com.fanlu.staffmanage.service.impl.SuperServiceImpl;
+import com.fanlu.staffmanage.service.SuperService;
 import com.fanlu.staffmanage.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +31,7 @@ public class SuperController {
     }
 
     @Autowired
-    SuperServiceImpl superService;
+    SuperService superService;
 
     @PostMapping("/user")
     public JSONObject addSuper(String account, String password) {

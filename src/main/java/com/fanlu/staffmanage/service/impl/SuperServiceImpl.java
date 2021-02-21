@@ -7,7 +7,12 @@ import com.fanlu.staffmanage.entity.User;
 import com.fanlu.staffmanage.entity.UserCoop;
 import com.fanlu.staffmanage.service.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by YGwhere on 2021/2/20 19:21
@@ -15,9 +20,9 @@ import org.springframework.stereotype.Service;
  *
  * @Author 15011_
  */
+@Transactional(isolation = Isolation.REPEATABLE_READ,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 @Service
 public class SuperServiceImpl implements SuperService {
-
     @Autowired
     UserDao userDao;
 

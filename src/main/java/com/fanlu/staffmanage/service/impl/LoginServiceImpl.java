@@ -8,6 +8,9 @@ import com.fanlu.staffmanage.entity.UserCoop;
 import com.fanlu.staffmanage.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by YGwhere on 2021/2/20 17:01
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
  *
  * @Author 15011_
  */
+@Transactional(isolation = Isolation.REPEATABLE_READ,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -66,7 +70,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public int checkUserAuth(String account) {
-        int auth = userDao.selectAuthByAccount(account);
-        return auth;
+        return userDao.selectAuthByAccount(account);
     }
 }

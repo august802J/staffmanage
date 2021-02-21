@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fanlu.staffmanage.dto.Inc;
 import com.fanlu.staffmanage.dto.RegisterMessage;
 import com.fanlu.staffmanage.entity.User;
-import com.fanlu.staffmanage.service.impl.LoginServiceImpl;
+import com.fanlu.staffmanage.service.LoginService;
 import com.fanlu.staffmanage.utils.Constant;
 import com.fanlu.staffmanage.utils.Message;
 import org.apache.shiro.SecurityUtils;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @Autowired
-    LoginServiceImpl loginService;
+    LoginService loginService;
 
     /**
      * 默认转向登录页面
