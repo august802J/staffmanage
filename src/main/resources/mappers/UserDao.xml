@@ -150,7 +150,7 @@
 
   <update id="updatePasswordById">
     update `user`
-    set `password` = #{account,jdbcType=VARCHAR}
+    set `password` = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

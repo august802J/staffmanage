@@ -2,6 +2,7 @@ package com.fanlu.staffmanage.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fanlu.staffmanage.dto.Inc;
+import com.fanlu.staffmanage.dto.RegisterMessage;
 import com.fanlu.staffmanage.entity.User;
 import com.fanlu.staffmanage.service.impl.LoginServiceImpl;
 import com.fanlu.staffmanage.utils.Constant;
@@ -79,20 +80,14 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public JSONObject register(String account, String password, @RequestBody JSONObject inc) {
-        if (null == account || account.length() != Constant.ACCOUNT_LENGTH || null == password
-                || password.length() < Constant.PASSWORD_MIN_LENGTH
-                || password.length() > Constant.PASSWORD_MAX_LENGTH || null == inc) {
+    public JSONObject register(@RequestBody JSONObject registerMessageJson) {
+        RegisterMessage registerMessage = JSONObject.parseObject(registerMessageJson.toJSONString(), RegisterMessage.class);
+        if (registerMessage.check()) {
             return Message.fail(628, "请求格式错误").toJsonObject();
         }
-        String incStr = inc.toJSONString();
-        Inc incObject = JSONObject.parseObject(incStr, Inc.class);
-        if (incObject.check()) {
-            return Message.fail(628, "请求格式错误").toJsonObject();
-        }
-
-        User user = new User(account, password);
-        int id = loginService.addUser(user, incObject);
+        Inc inc =  registerMessage.getInc();
+        User user = new User(registerMessage.getAccount(), registerMessage.getPassword());
+        int id = loginService.addUser(user, inc);
         return Message.success().toJsonObject();
     }
 
@@ -101,7 +96,7 @@ public class LoginController {
         if(null == account || account.length() != Constant.ACCOUNT_LENGTH) {
             return Message.fail(628, "请求格式错误").toJsonObject();
         }
-        if (loginService.checkIsAccount(account)) {
+        if (!loginService.checkIsAccount(account)) {
             return Message.fail(626, "账号不存在").toJsonObject();
         } else {
             return Message.success().toJsonObject();

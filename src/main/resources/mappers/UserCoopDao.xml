@@ -131,10 +131,10 @@
       </if>
       <if test="userPerPhone != null">
         #{userPerPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="userPerIdurl != null">
-        #{userPerIdurl,jdbcType=VARCHAR},
-      </if>
+      </if>      <if test="userPerIdurl != null">
+      #{userPerIdurl,jdbcType=VARCHAR},
+    </if>
+
       <if test="userCoopJpgurl != null">
         #{userCoopJpgurl,jdbcType=VARCHAR},
       </if>

@@ -54,7 +54,7 @@ public class Inc {
      * @return
      */
     public boolean sal(String str) {
-        return null != str || "".equals(str);
+        return null != str && !"".equals(str);
     }
 
     /**

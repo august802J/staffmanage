@@ -2,7 +2,6 @@ package com.fanlu.staffmanage.config;
 
 import com.fanlu.staffmanage.utils.Constant;
 import com.fanlu.staffmanage.utils.MyRealm;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
@@ -41,11 +40,15 @@ public class ShiroConfig {
         Map<String, String> fiterChainMap = new LinkedHashMap<>();
         fiterChainMap.put("/login", "anon");
         fiterChainMap.put("/noPermission", "anon");
+        fiterChainMap.put("/register", "anon");
+        fiterChainMap.put("/findpassword", "anon");
         fiterChainMap.put("/","anon");
 
         fiterChainMap.put("/user/**", "authc,roles[" + Constant.STRING_PERSON + "]");
         fiterChainMap.put("/admin/**", "authc,roles[" + Constant.STRING_INC + "]");
         fiterChainMap.put("/super/**", "authc,roles[" + Constant.STRING_MANAGER + "]");
+
+        fiterChainMap.put("logout", "user");
 
         fiterChainMap.put("/**", "authc");
         definition.addPathDefinitions(fiterChainMap);
