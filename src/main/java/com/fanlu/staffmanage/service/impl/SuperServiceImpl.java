@@ -7,8 +7,6 @@ import com.fanlu.staffmanage.entity.User;
 import com.fanlu.staffmanage.entity.UserCoop;
 import com.fanlu.staffmanage.service.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
