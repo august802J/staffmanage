@@ -40,12 +40,14 @@ public class ShiroConfig {
 
         Map<String, String> fiterChainMap = new LinkedHashMap<>();
         fiterChainMap.put("/login", "anon");
+        fiterChainMap.put("/noPermission", "anon");
+        fiterChainMap.put("/","anon");
 
         fiterChainMap.put("/user/**", "authc,roles[" + Constant.STRING_PERSON + "]");
         fiterChainMap.put("/admin/**", "authc,roles[" + Constant.STRING_INC + "]");
         fiterChainMap.put("/super/**", "authc,roles[" + Constant.STRING_MANAGER + "]");
 
-//        fiterChainMap.put("/**", "authc");
+        fiterChainMap.put("/**", "authc");
         definition.addPathDefinitions(fiterChainMap);
         return definition;
     }

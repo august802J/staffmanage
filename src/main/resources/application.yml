@@ -78,6 +78,6 @@ shiro:
   web:
     enabled: true
   # 根据目录确定
-  unauthorizedUrl: /error
+  unauthorizedUrl: /noPermission
   successUrl: /success
   loginUrl: /login

@@ -31,7 +31,7 @@ public class LoginController {
      */
     @GetMapping("/")
     public String index() {
-        return "login";
+        return "redirect: /login";
     }
 
     /**
@@ -47,9 +47,9 @@ public class LoginController {
      * 转向登录失败页面
      * @return
      */
-    @GetMapping("/error")
-    public JSONObject loginError() {
-        return Message.fail(627,  "密码不正确").toJsonObject();
+    @GetMapping("/noPermission")
+    public String loginError() {
+        return "noPermission";
     }
 
     @GetMapping("/login")
