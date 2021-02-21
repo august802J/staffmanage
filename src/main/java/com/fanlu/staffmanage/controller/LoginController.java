@@ -63,19 +63,19 @@ public class LoginController {
      * @param password
      */
     @PostMapping("/login")
-    public String login(String account, String password) {
+    public JSONObject login(String account, String password) {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(new UsernamePasswordToken(account, password));
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            return Message.fail(627, "密码错误").toJsonObject();
         }
-        return "redirect:/success";
+        return Message.success().toJsonObject();
     }
 
     @PostMapping("/logout")
-    public String logout() {
-        return "redirect:/";
+    public JSONObject logout() {
+        return Message.success().toJsonObject();
     }
 
     @PostMapping("/register")
