@@ -48,7 +48,7 @@ public class ShiroConfig {
         fiterChainMap.put("/admin/**", "authc,roles[" + Constant.STRING_INC + "]");
         fiterChainMap.put("/super/**", "authc,roles[" + Constant.STRING_MANAGER + "]");
 
-        fiterChainMap.put("logout", "user");
+        fiterChainMap.put("/logout", "logout");
 
         fiterChainMap.put("/**", "authc");
         definition.addPathDefinitions(fiterChainMap);
