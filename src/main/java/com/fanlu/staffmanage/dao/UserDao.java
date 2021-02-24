@@ -14,7 +14,7 @@ public interface UserDao {
      * @param id
      * @return
      */
-    int deleteByPrimaryKey(Integer id);
+    boolean deleteByPrimaryKey(Integer id);
 
     /**
      * 插入一条用户信息

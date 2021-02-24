@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StaffInfoDao {
-    int deleteByPrimaryKey(Integer id);
+    boolean deleteByPrimaryKey(Integer id);
 
     int insert(StaffInfo record);
 

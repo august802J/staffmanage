@@ -29,18 +29,19 @@
     staff_eva_manageCop, staff_eva_managerAtt, staff_info_updateTime
   </sql>
 
+<!--  查询评论-->
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from staff_evaluation
     where id = #{id,jdbcType=INTEGER}
   </select>
-
+<!--删除评论-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff_evaluation
     where id = #{id,jdbcType=INTEGER}
   </delete>
-
+<!--插入一条-->
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation" useGeneratedKeys="true">
     insert into staff_evaluation (staff_id, staff_eva_job, staff_eva_manager, 
       staff_eva_score, staff_eva_attitude, staff_eva_complete, 
@@ -55,7 +56,7 @@
       #{staffEvaCoopbehavior,jdbcType=VARCHAR}, #{staffEvaConnection,jdbcType=VARCHAR}, 
       #{staffEvaManagecop,jdbcType=VARCHAR}, #{staffEvaManageratt,jdbcType=VARCHAR})
   </insert>
-
+<!--插入部分-->
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.StaffEvaluation" useGeneratedKeys="true">
     insert into staff_evaluation
     <trim prefix="(" suffix=")" suffixOverrides=",">
