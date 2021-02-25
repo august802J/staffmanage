@@ -61,6 +61,9 @@ public class UserCoop implements Serializable {
         this.userPerPhone = inc.getLegal_phone();
     }
 
+    public UserCoop() {
+    }
+
     public Integer getId() {
         return id;
     }

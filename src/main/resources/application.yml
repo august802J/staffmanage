@@ -66,12 +66,6 @@ mybatis:
   type-aliases-package: com.fanlu.staffmanage.entity
   config-location: classpath:spring-mybatis.xml
 
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countSql
-
 shiro:
   sessionManager:
     sessionIdCookieEnabled: true

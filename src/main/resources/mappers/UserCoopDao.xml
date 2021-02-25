@@ -26,10 +26,24 @@
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from user_coop
     where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectUserCooInfo" resultType="com.fanlu.staffmanage.entity.UserCoop">
+    SELECT
+      id,
+      user_coop_logoUrl,
+      user_coop_name,
+      user_coop_isCheck
+    FROM
+      user_coop
+  </select>
+  <select id="selectTotal" resultType="java.lang.Integer">
+    select count(*)
+    from user_coop
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

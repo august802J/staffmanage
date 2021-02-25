@@ -42,7 +42,19 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectStaffInfoByGroupId" resultType="com.fanlu.staffmanage.entity.StaffInfo">
+    select id, staff_info_name, staff_info_age, staff_info_phone
+    from staff_info
+    where staff_info_groupId = #{groupId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTotal" resultType="java.lang.Integer">
+    select count(*)
+    from staff_info
+    where staff_info_groupId = #{groupId,jdbcType=INTEGER}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff_info
     where id = #{id,jdbcType=INTEGER}
   </delete>

@@ -3,6 +3,8 @@ package com.fanlu.staffmanage.dao;
 import com.fanlu.staffmanage.entity.UserCoop;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserCoopDao {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,12 @@ public interface UserCoopDao {
     int updateByPrimaryKeySelective(UserCoop record);
 
     int updateByPrimaryKey(UserCoop record);
+
+    List<UserCoop> selectUserCooInfo();
+
+    /**
+     * 查询注册企业总数
+     * @return
+     */
+    int selectTotal();
 }
