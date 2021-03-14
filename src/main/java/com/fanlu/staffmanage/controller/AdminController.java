@@ -18,14 +18,14 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    /**
-     * 测试接口，发布将删除
-     * @return
-     */
-    @GetMapping("/test")
-    public String Test() {
-        return "test success";
-    }
+//    /**
+//     * 测试接口，发布将删除
+//     * @return
+//     */
+//    @GetMapping("/test")
+//    public String Test() {
+//        return "test success";
+//    }
 
     @PostMapping("/user")
     public JSONObject addAdmin(String account,String password) {

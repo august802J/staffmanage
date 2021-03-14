@@ -76,8 +76,7 @@ public class SuperServiceImpl implements SuperService {
         return userCoopPageInfo;
     }
 
-    @Override
-    public PageInfo<StaffInfo> selectStaffInfoByPage(int groupId, Integer page, Integer pagesize) {
+    @Override    public PageInfo<StaffInfo> selectStaffInfoByPage(int groupId, Integer page, Integer pagesize) {
         if(page == null) {
             page = 1;
         }

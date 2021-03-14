@@ -1,14 +1,16 @@
 package com.fanlu.staffmanage.config;
 
+import com.fanlu.staffmanage.filter.ShiroFilter;
 import com.fanlu.staffmanage.utils.Constant;
 import com.fanlu.staffmanage.utils.MyRealm;
 import org.apache.shiro.realm.Realm;
-import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
-import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,8 +36,14 @@ public class ShiroConfig {
     }
 
     @Bean
-    public ShiroFilterChainDefinition shiroFilterChainDefinition() {
-        DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
+        ShiroFilterFactoryBean filter = new ShiroFilterFactoryBean();
+        filter.setSecurityManager(securityManager);
+
+        Map<String, Filter> filters = new HashMap<>();
+        ShiroFilter authenticationFilter = new ShiroFilter();
+        filters.put("authc", authenticationFilter);
+        filter.setFilters(filters);
 
         Map<String, String> fiterChainMap = new LinkedHashMap<>();
         fiterChainMap.put("/login", "anon");
@@ -51,7 +59,8 @@ public class ShiroConfig {
         fiterChainMap.put("/logout", "logout");
 
         fiterChainMap.put("/**", "authc");
-        definition.addPathDefinitions(fiterChainMap);
-        return definition;
+        filter.setFilterChainDefinitionMap(fiterChainMap);
+
+        return filter;
     }
 }

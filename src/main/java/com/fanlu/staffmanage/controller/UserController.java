@@ -20,14 +20,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    /**
-     * 测试接口，发布将删除
-     * @return
-     */
-    @GetMapping("/test")
-    public String Test() {
-        return "test success";
-    }
+//    /**
+//     * 测试接口，发布将删除
+//     * @return
+//     */
+//    @GetMapping("/test")
+//    public String Test() {
+//        return "test success";
+//    }
 
 
     @PutMapping("/evaluation")

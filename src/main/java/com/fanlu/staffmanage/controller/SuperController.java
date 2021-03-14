@@ -24,15 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/super")
 public class SuperController {
 
-    /**
-     * 测试接口，发布将删除
-     *
-     * @return
-     */
-    @GetMapping("/test")
-    public String Test() {
-        return "test success";
-    }
+//    /**
+//     * 测试接口，发布将删除
+//     *
+//     * @return
+//     */
+//    @GetMapping("/test")
+//    public String Test() {
+//        return "test success";
+//    }
 
     @Autowired
     SuperService superService;
