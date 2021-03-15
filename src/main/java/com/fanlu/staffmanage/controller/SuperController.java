@@ -80,6 +80,7 @@ public class SuperController {
     @GetMapping("/incs")
     public JSONObject getIncInfos(Integer page, Integer pagesize) {
         PageInfo<UserCoop> userCoopPageInfo = superService.selectUserCoopInfoByPage(page, pagesize);
+        System.out.println("请求成功");
         if(userCoopPageInfo == null) {
             return Message.fail().toJsonObject();
         } else {

@@ -78,7 +78,7 @@ public class UserController {
         String staff_abi=JSONObject.toJSONString(staffAbility);
         String staff_job=JSONObject.toJSONString(staffJob);
         String staff_edu=JSONObject.toJSONString(staffEdu);
-        if(staff_info.equals("")){
+        if(!"".equals(staff_info)){
             return Message.success().add("staffInfo",staff_info).add("staffEvaluation",staff_eva)
                     .add("staffJob",staff_job).add("staffAbility",staff_abi).add("staffEdu",staff_edu)
                     .toJsonObject();

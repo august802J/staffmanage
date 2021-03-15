@@ -22,6 +22,7 @@ public class ShiroFilter extends AuthenticationFilter {
 
         httpServletResponse.setHeader("Access-Control-Allow-Origin", httpServletRequest.getHeader("Origin"));
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+        httpServletResponse.setHeader("Access-Control-Expose-Headers", "statusInfo, data, status");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", httpServletRequest.getHeader("Access-Control-Request-Headers"));
 
         if(httpServletRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {

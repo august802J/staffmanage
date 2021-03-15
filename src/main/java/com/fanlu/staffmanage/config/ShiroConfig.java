@@ -1,7 +1,6 @@
 package com.fanlu.staffmanage.config;
 
 import com.fanlu.staffmanage.filter.ShiroFilter;
-import com.fanlu.staffmanage.utils.Constant;
 import com.fanlu.staffmanage.utils.MyRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -52,13 +51,16 @@ public class ShiroConfig {
         fiterChainMap.put("/findpassword", "anon");
         fiterChainMap.put("/","anon");
 
-        fiterChainMap.put("/user/**", "authc,roles[" + Constant.STRING_PERSON + "]");
-        fiterChainMap.put("/admin/**", "authc,roles[" + Constant.STRING_INC + "]");
-        fiterChainMap.put("/super/**", "authc,roles[" + Constant.STRING_MANAGER + "]");
+//        fiterChainMap.put("/user/**", "authc,roles[" + Constant.STRING_PERSON + "]");
+//        fiterChainMap.put("/admin/**", "authc,roles[" + Constant.STRING_INC + "]");
+//        fiterChainMap.put("/super/**", "authc,roles[" + Constant.STRING_MANAGER + "]");
+        fiterChainMap.put("/user/**", "anon");
+        fiterChainMap.put("/admin/**", "anon");
+        fiterChainMap.put("/super/**", "anon");
 
         fiterChainMap.put("/logout", "logout");
 
-        fiterChainMap.put("/**", "authc");
+        fiterChainMap.put("/**", "anon");
         filter.setFilterChainDefinitionMap(fiterChainMap);
 
         return filter;
