@@ -16,4 +16,6 @@ public interface StaffEduDao {
     int updateByPrimaryKeySelective(StaffEdu record);
 
     int updateByPrimaryKey(StaffEdu record);
+
+    boolean deleteByStaffId(Integer staff_id);
 }
