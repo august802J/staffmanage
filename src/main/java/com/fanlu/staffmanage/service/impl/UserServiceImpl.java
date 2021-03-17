@@ -50,12 +50,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public StaffEvaluation addStaff_evaluation(StaffEvaluation staffEvaluation) {
         staffEvaluationDao.insert(staffEvaluation);
+        System.out.println("cece"+staffEvaluation);
         return staffEvaluationDao.selectByPrimaryKey(staffEvaluation.getId());
     }
 
     @Override
     public boolean deleteStaff(Integer id) {
-
         return staffInfoDao.deleteByPrimaryKey(id);
     }
 

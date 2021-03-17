@@ -34,13 +34,16 @@ public class UserController {
     /*
      * 对方法的描述
      *
-     修改指定者评价
+     修改指定者评价(未测)
      * @return
      * @throws
      */
     @PutMapping("/evaluation")
     public JSONObject updateStaff_evaluation(@RequestBody JSONObject evaluationMessageJson) {
         StaffEvaluation staffEvaluation =JSONObject.parseObject(evaluationMessageJson.toJSONString(), StaffEvaluation.class);
+        if(JSONObject.toJSONString(staffEvaluation).equals("") || staffEvaluation.getStaffId()==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffEvaluation staffEvaluation1=userService.updateStaff_evaluation(staffEvaluation);
         String staff_eva=JSONObject.toJSONString(staffEvaluation1);
         if(staff_eva.equals("")){
@@ -53,13 +56,13 @@ public class UserController {
     /*
      * 对方法的描述
      *
-     查询多个评价
+     查询多个评价（sql那里出问题了）
      * @return
      * @throws
      */
     @GetMapping("/evaluations")
-    public JSONObject checkStaffs_evaluation(int id,int page,int pagesize) {
-        if(Integer.valueOf(id)==null){
+    public JSONObject checkStaffs_evaluation(Integer id,Integer page,Integer pagesize) {
+        if(id==null){
             return Message.fail(628,"请求格式错误").toJsonObject();
         }
         PageInfo<StaffEvaluation> staffEvaluationpageInfo =userService.selectStaff_evaByPage(id,page,pagesize);
@@ -74,13 +77,16 @@ public class UserController {
     /*
      * 对方法的描述
      *
-     添加评论
+     添加评论（未测）
      * @return
      * @throws
      */
     @PostMapping("/evaluation")
     public JSONObject addStaff_evaluation(@RequestBody JSONObject evaluationMessageJson) {
         StaffEvaluation staffEvaluation =JSONObject.parseObject(evaluationMessageJson.toJSONString(), StaffEvaluation.class);
+        if(JSONObject.toJSONString(staffEvaluation).equals("")||staffEvaluation.getStaffId()==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffEvaluation staffEvaluation1 =userService.addStaff_evaluation(staffEvaluation);
         String staff_eva=JSONObject.toJSONString(staffEvaluation1);
         if(staff_eva.equals("")){
@@ -93,12 +99,15 @@ public class UserController {
     /*
      * 对方法的描述
      *
-     得到员工详情页面
+     得到员工详情页面（已测）
      * @return
      * @throws
      */
     @GetMapping("/staff")
-    public JSONObject checkStaff(int id) {
+    public JSONObject checkStaff(Integer id) {
+        if(id==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffInfo staffInfo=userService.checkStaff_info(id);
         StaffEvaluation staffEvaluation=userService.checkStaff_evaluation(id);
         StaffJob staffJob = userService.checkStaff_job(id);
@@ -121,12 +130,15 @@ public class UserController {
     /*
      * 对方法的描述
      *
-     删除本公司指定员工
+     删除本公司指定员工（已测）
      * @return
      * @throws
      */
     @DeleteMapping("/staves")
-    public JSONObject deleteStaff(int id) {
+    public JSONObject deleteStaff(Integer id) {
+        if(id==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffInfo staffInfo=userService.checkStaff_info(id);
         String staff_info=JSONObject.toJSONString(staffInfo);
         if(staff_info.equals("")){
@@ -146,13 +158,13 @@ public class UserController {
     /*
      * 对方法的描述
      *
-     查询多个本公司人员
+     查询多个本公司人员（已测）
      * @return
      * @throws
      */
     @GetMapping("/staves")
-    public JSONObject getStaves(int id,int page,int pagesize){
-        if(Integer.valueOf(id).equals("")){
+    public JSONObject getStaves(Integer id,Integer page,Integer pagesize){
+        if(id==null){
             return Message.fail(628,"请求格式错误").toJsonObject();
         }
         PageInfo<StaffInfo> staffsInfo =userService.selectStaffInfoByPage(id,page, pagesize);
@@ -166,7 +178,7 @@ public class UserController {
     /*
      * 对方法的描述
      * 
-     查看本公司多个离职员工
+     查看本公司多个离职员工（已测）
      * @return 基本信息
      * @throws 
      */
