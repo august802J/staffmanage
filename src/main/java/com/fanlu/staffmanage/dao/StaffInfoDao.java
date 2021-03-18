@@ -31,4 +31,6 @@ public interface StaffInfoDao {
      * @return
      */
     int selectTotal(Integer groupId);
+
+    List<StaffInfo> selectStaffIsWork();
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fanlu.staffmanage.entity.*;
 import com.fanlu.staffmanage.service.UserService;
 import com.fanlu.staffmanage.utils.Message;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +31,19 @@ public class UserController {
 //    }
 
 
+    /*
+     * 对方法的描述
+     *
+     修改指定者评价(未测)
+     * @return
+     * @throws
+     */
     @PutMapping("/evaluation")
     public JSONObject updateStaff_evaluation(@RequestBody JSONObject evaluationMessageJson) {
         StaffEvaluation staffEvaluation =JSONObject.parseObject(evaluationMessageJson.toJSONString(), StaffEvaluation.class);
+        if(JSONObject.toJSONString(staffEvaluation).equals("") || staffEvaluation.getStaffId()==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffEvaluation staffEvaluation1=userService.updateStaff_evaluation(staffEvaluation);
         String staff_eva=JSONObject.toJSONString(staffEvaluation1);
         if(staff_eva.equals("")){
@@ -42,21 +53,40 @@ public class UserController {
         }
 
     }
-
-    @GetMapping("/evaluation")
-    public JSONObject checkStaff_evaluation(int id) {
-        StaffEvaluation staffEvaluation =userService.checkStaff_evaluation(id);
-        String staff_eva=JSONObject.toJSONString(staffEvaluation);
-        if(staff_eva.equals("")){
+    /*
+     * 对方法的描述
+     *
+     查询多个评价（sql那里出问题了）
+     * @return
+     * @throws
+     */
+    @GetMapping("/evaluations")
+    public JSONObject checkStaffs_evaluation(Integer id,Integer page,Integer pagesize) {
+        if(id==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
+        PageInfo<StaffEvaluation> staffEvaluationpageInfo =userService.selectStaff_evaByPage(id,page,pagesize);
+        if(staffEvaluationpageInfo == null) {
             return Message.fail().toJsonObject();
-        }else{
-            return Message.success().add("staffEvaluation",staff_eva).toJsonObject();
+        } else {
+            System.out.println(staffEvaluationpageInfo.getList());
+            return Message.success().add("num", staffEvaluationpageInfo.getTotal())
+                    .add("pages", staffEvaluationpageInfo.getPages()).add("result", staffEvaluationpageInfo.getList()).toJsonObject();
         }
     }
-
+    /*
+     * 对方法的描述
+     *
+     添加评论（未测）
+     * @return
+     * @throws
+     */
     @PostMapping("/evaluation")
     public JSONObject addStaff_evaluation(@RequestBody JSONObject evaluationMessageJson) {
         StaffEvaluation staffEvaluation =JSONObject.parseObject(evaluationMessageJson.toJSONString(), StaffEvaluation.class);
+        if(JSONObject.toJSONString(staffEvaluation).equals("")||staffEvaluation.getStaffId()==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffEvaluation staffEvaluation1 =userService.addStaff_evaluation(staffEvaluation);
         String staff_eva=JSONObject.toJSONString(staffEvaluation1);
         if(staff_eva.equals("")){
@@ -66,8 +96,18 @@ public class UserController {
         }
     }
 
+    /*
+     * 对方法的描述
+     *
+     得到员工详情页面（已测）
+     * @return
+     * @throws
+     */
     @GetMapping("/staff")
-    public JSONObject checkStaff(int id) {
+    public JSONObject checkStaff(Integer id) {
+        if(id==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
         StaffInfo staffInfo=userService.checkStaff_info(id);
         StaffEvaluation staffEvaluation=userService.checkStaff_evaluation(id);
         StaffJob staffJob = userService.checkStaff_job(id);
@@ -78,23 +118,78 @@ public class UserController {
         String staff_abi=JSONObject.toJSONString(staffAbility);
         String staff_job=JSONObject.toJSONString(staffJob);
         String staff_edu=JSONObject.toJSONString(staffEdu);
-        if(!"".equals(staff_info)){
-            return Message.success().add("staffInfo",staff_info).add("staffEvaluation",staff_eva)
-                    .add("staffJob",staff_job).add("staffAbility",staff_abi).add("staffEdu",staff_edu)
-                    .toJsonObject();
+        if(staff_info.equals("")){
+            return Message.fail().toJsonObject();
         }else{
-            return Message.fail().toJsonObject();
+            return Message.success().add("staffInfo",staff_info).add("staffEvaluation",staff_eva)
+                .add("staffJob",staff_job).add("staffAbility",staff_abi).add("staffEdu",staff_edu)
+                .toJsonObject();
         }
-
     }
 
+    /*
+     * 对方法的描述
+     *
+     删除本公司指定员工（已测）
+     * @return
+     * @throws
+     */
     @DeleteMapping("/staves")
-    public JSONObject deleteStaff(int id) {
-        if (userService.deleteStaff(id)) {
-            return Message.success().toJsonObject();
-        } else {
+    public JSONObject deleteStaff(Integer id) {
+        if(id==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
+        StaffInfo staffInfo=userService.checkStaff_info(id);
+        String staff_info=JSONObject.toJSONString(staffInfo);
+        if(staff_info.equals("")){
             return Message.fail().toJsonObject();
+        } else {
+            userService.deleteStaff_job(id);
+            userService.deleteStaff_edu(id);
+            userService.deleteStaff_ability(id);
+            userService.deleteStaff_eva(id);
+            if (userService.deleteStaff(id)) {
+                return Message.success().toJsonObject();
+            }else {
+                return Message.fail().toJsonObject();
+            }
         }
     }
-
+    /*
+     * 对方法的描述
+     *
+     查询多个本公司人员（已测）
+     * @return
+     * @throws
+     */
+    @GetMapping("/staves")
+    public JSONObject getStaves(Integer id,Integer page,Integer pagesize){
+        if(id==null){
+            return Message.fail(628,"请求格式错误").toJsonObject();
+        }
+        PageInfo<StaffInfo> staffsInfo =userService.selectStaffInfoByPage(id,page, pagesize);
+        if(staffsInfo == null) {
+            return Message.fail().toJsonObject();
+        } else {
+            return Message.success().add("num", staffsInfo.getTotal())
+                    .add("pages", staffsInfo.getPages()).add("result", staffsInfo.getList()).toJsonObject();
+        }
+    }
+    /*
+     * 对方法的描述
+     * 
+     查看本公司多个离职员工（已测）
+     * @return 基本信息
+     * @throws 
+     */
+    @GetMapping("/resigns")
+    public JSONObject getResigns(Integer page,Integer pagesize) {
+        PageInfo<StaffInfo> staff_ResignsInfo =userService.selectResignsByPage(page, pagesize);
+        if(staff_ResignsInfo == null) {
+            return Message.fail().toJsonObject();
+        } else {
+            return Message.success().add("num", staff_ResignsInfo.getTotal())
+                    .add("pages", staff_ResignsInfo.getPages()).add("result", staff_ResignsInfo.getList()).toJsonObject();
+        }
+    }
 }

@@ -237,4 +237,21 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="selectTotal" resultType="java.lang.Integer">
+    select count(*)
+    from staff_evaluation
+    where staff_id = #{staff_id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectStaffEvalutionById" resultType="com.fanlu.staffmanage.entity.StaffEvaluation">
+    select
+    <include refid="Base_Column_List" />
+    from staff_evalution
+    where staff_id = #{staff_id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByStaffId" parameterType="java.lang.Integer">
+    delete from staff_evaluation
+    where staff_id = #{staff_id,jdbcType=INTEGER}
+  </delete>
 </mapper>

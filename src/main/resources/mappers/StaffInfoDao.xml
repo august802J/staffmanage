@@ -43,9 +43,15 @@
   </select>
 
   <select id="selectStaffInfoByGroupId" resultType="com.fanlu.staffmanage.entity.StaffInfo">
-    select id, staff_info_name, staff_info_age, staff_info_phone
+    select id, staff_info_name, staff_info_age, staff_info_phone,staff_info_url,staff_info_sex
     from staff_info
     where staff_info_groupId = #{groupId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectStaffIsWork" resultType="com.fanlu.staffmanage.entity.StaffInfo">
+    select id, staff_info_name, staff_info_age, staff_info_phone,staff_info_url,staff_info_sex
+    from staff_info
+    where staff_info_groupId = 3
   </select>
 
   <select id="selectTotal" resultType="java.lang.Integer">

@@ -115,4 +115,11 @@
       staff_job_reason = #{staffJobReason,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByStaffId" parameterType="java.lang.Integer">
+    delete from staff_job
+    where staff_id = #{staff_id,jdbcType=INTEGER}
+  </delete>
+
+
 </mapper>

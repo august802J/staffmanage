@@ -44,6 +44,7 @@
   <select id="selectTotal" resultType="java.lang.Integer">
     select count(*)
     from user_coop
+    where id = #{groupId,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
