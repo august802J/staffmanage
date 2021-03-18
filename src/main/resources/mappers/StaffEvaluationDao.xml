@@ -246,7 +246,7 @@
   <select id="selectStaffEvalutionById" resultType="com.fanlu.staffmanage.entity.StaffEvaluation">
     select
     <include refid="Base_Column_List" />
-    from staff_evalution
+    from staff_evaluation
     where staff_id = #{staff_id,jdbcType=INTEGER}
   </select>
 

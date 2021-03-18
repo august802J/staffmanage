@@ -40,7 +40,7 @@ public class StaffEvaluation implements Serializable {
 
     private String staffEvaManagecop;
 
-    private String staffEvaManageratt;
+    private String staffEvaManagerAtt;
 
     private Date staffInfoUpdatetime;
 
@@ -175,11 +175,11 @@ public class StaffEvaluation implements Serializable {
     }
 
     public String getStaffEvaManageratt() {
-        return staffEvaManageratt;
+        return staffEvaManagerAtt;
     }
 
     public void setStaffEvaManageratt(String staffEvaManageratt) {
-        this.staffEvaManageratt = staffEvaManageratt;
+        this.staffEvaManagerAtt = staffEvaManageratt;
     }
 
     public Date getStaffInfoUpdatetime() {

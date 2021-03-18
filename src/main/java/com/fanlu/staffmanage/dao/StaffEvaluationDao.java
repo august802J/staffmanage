@@ -1,6 +1,7 @@
 package com.fanlu.staffmanage.dao;
 
 import com.fanlu.staffmanage.entity.StaffEvaluation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface StaffEvaluationDao {
 
     int insertSelective(StaffEvaluation record);
 
-    StaffEvaluation selectByPrimaryKey(Integer id);
+    StaffEvaluation selectByPrimaryKey(@Param("id") Integer id);
 
     int updateByPrimaryKeySelective(StaffEvaluation record);
 
