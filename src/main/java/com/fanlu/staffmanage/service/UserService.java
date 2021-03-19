@@ -51,4 +51,13 @@ public interface UserService {
 
     //查询多个离职人员
     PageInfo<StaffInfo> selectResignsByPage(Integer page, Integer pagesize);
+
+    PageInfo<StaffInfo> selectStaffInfoByName(String name, Integer page, Integer pagesize);
+
+    PageInfo<StaffInfo> selectAllStaffInfoByPage(Integer page, Integer pagesize);
+
+    boolean isTrue(Integer staffId,Integer id);
+
+    PageInfo<StaffInfo> selectStaffInfoByinc(String name, Integer page, Integer pagesize);
+
 }
