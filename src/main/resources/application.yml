@@ -61,6 +61,10 @@ spring:
       prefix: /static/
       suffix: .html
     dispatch-options-request: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 10MB
 
 mybatis:
   mapper-locations: classpath:mappers/*xml

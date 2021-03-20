@@ -12,6 +12,7 @@ public class Inc {
     private int groupId;
     private String icpUrl;
     private String idUrl;
+    private String logoUrl;
     private String inc_name;
     private String inc_icp;
     private String inc_place;
@@ -29,6 +30,7 @@ public class Inc {
 
     /**
      * 将 UserCoop 类转换成 Inc 类
+     *
      * @param userCoop
      */
     public Inc(UserCoop userCoop) {
@@ -46,10 +48,12 @@ public class Inc {
         this.legal_idkind = userCoop.getUserPerIdkind();
         this.legal_id = userCoop.getUserPerId();
         this.legal_phone = userCoop.getUserPerPhone();
+        this.logoUrl = userCoop.getUserCoopLogourl();
     }
 
     /**
      * 判断字符串是否为 null 或 空字符串
+     *
      * @param str
      * @return
      */
@@ -59,12 +63,13 @@ public class Inc {
 
     /**
      * 判断属性是否全部非空
+     *
      * @return
      */
     public boolean check() {
         return sal(inc_name) && sal(inc_icp) && sal(inc_place) && sal(inc_rage)
                 && sal(kind) && sal(inc_count) && sal(legal_name) && sal(legal_job)
-                && sal(legal_id) && sal(legal_idkind) && sal(legal_phone);
+                && sal(legal_id) && sal(legal_idkind) && sal(legal_phone) && sal(logoUrl) && sal(icpUrl) && sal(idUrl);
     }
 
     public String getInc_name() {

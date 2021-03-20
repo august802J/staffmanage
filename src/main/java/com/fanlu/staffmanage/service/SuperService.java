@@ -1,6 +1,8 @@
 package com.fanlu.staffmanage.service;
 
 import com.fanlu.staffmanage.dto.Inc;
+import com.fanlu.staffmanage.entity.Advice;
+import com.fanlu.staffmanage.entity.Feedback;
 import com.fanlu.staffmanage.entity.StaffInfo;
 import com.fanlu.staffmanage.entity.UserCoop;
 import com.github.pagehelper.PageInfo;
@@ -44,4 +46,54 @@ public interface SuperService {
      * @return
      */
     PageInfo<StaffInfo> selectStaffInfoByPage(int groupId, Integer page, Integer pagesize);
+
+    /**
+     * 查询用户总数
+     * @return
+     */
+    int selectUserCount();
+
+    /**
+     * 修改建议状态
+     * @param id
+     * @return
+     */
+    boolean updateFeedbackStatus(Integer id);
+
+    /**
+     * 通过用户id查询建议
+     * @param userId
+     * @return
+     */
+    PageInfo<Feedback> selectFeedbacksByUser(Integer userId, Integer page, Integer pagesize);
+
+    /**
+     * 删除反馈建议
+     * @param feedId
+     * @return
+     */
+    boolean deleteFeedback(Integer feedId);
+
+    /**
+     * 发布一条公告
+     * @param groupId
+     * @param userId
+     * @param message
+     * @return
+     */
+    boolean addAdvice(Integer groupId, Integer userId, String message);
+
+    /**
+     * 删除公告
+     * @param id
+     * @return
+     */
+    boolean deleteAdvice(Integer id);
+
+    /**
+     * 查询全部公告
+     * @return
+     */
+    PageInfo<Advice> selectAllAdvice(Integer page, Integer pagesize);
+
 }

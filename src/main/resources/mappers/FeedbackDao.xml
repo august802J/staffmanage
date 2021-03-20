@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanlu.staffmanage.dao.FeedbackDao">
+  <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.Feedback">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="feed_id" jdbcType="INTEGER" property="feedId" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, feed_id, group_id, message, `status`
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUserId" resultType="com.fanlu.staffmanage.entity.Feedback">
+    select
+    <include refid="Base_Column_List" />
+    from feedback
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer">
+    select ifnull((
+        select count(*) from feedback
+        where user_id = #{userId,jdbcType=INTEGER}
+      ), 0)
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from feedback
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.Feedback" useGeneratedKeys="true">
+    insert into feedback (user_id, feed_id, group_id, 
+      message, `status`)
+    values (#{userId,jdbcType=INTEGER}, #{feedId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
+      #{message,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT})
+  </insert>
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.Feedback" useGeneratedKeys="true">
+    insert into feedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="feedId != null">
+        feed_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="feedId != null">
+        #{feedId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.Feedback">
+    update feedback
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="feedId != null">
+        feed_id = #{feedId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.Feedback">
+    update feedback
+    set user_id = #{userId,jdbcType=INTEGER},
+      feed_id = #{feedId,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateStatusById">
+    update feedback
+    set `status` = 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

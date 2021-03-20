@@ -3,6 +3,7 @@ package com.fanlu.staffmanage.service.impl;
 import com.fanlu.staffmanage.dao.UserCoopDao;
 import com.fanlu.staffmanage.dao.UserDao;
 import com.fanlu.staffmanage.dto.Inc;
+import com.fanlu.staffmanage.dto.Status;
 import com.fanlu.staffmanage.entity.User;
 import com.fanlu.staffmanage.entity.UserCoop;
 import com.fanlu.staffmanage.service.LoginService;
@@ -32,6 +33,7 @@ public class LoginServiceImpl implements LoginService {
     public int addUserCoop(Inc inc) {
         UserCoop userCoop = new UserCoop(inc);
         userCoopDao.insertSelective(userCoop);
+        Status.plusInc();
         return userCoop.getId();
     }
 
@@ -55,6 +57,7 @@ public class LoginServiceImpl implements LoginService {
         int groupId = addUserCoop(inc);
         user.setGroupId(groupId);
         userDao.insertSelective(user);
+        Status.plusUsers();
         return user.getId();
     }
 

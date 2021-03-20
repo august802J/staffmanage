@@ -36,6 +36,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private StaffAbilityDao staffAbilityDao;
 
+    @Autowired
+    private FeedbackDao feedbackDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private AdviceDao adviceDao;
+
+    private static final String ORDER_BY_STATUS = "status asc";
+
     @Override
     public StaffEvaluation updateStaff_evaluation(StaffEvaluation staffEvaluation) {
         staffEvaluationDao.updateByPrimaryKey(staffEvaluation);
@@ -150,8 +161,48 @@ public class UserServiceImpl implements UserService {
         }
         PageHelper.startPage(page, pagesize);
         List<StaffInfo> staffInfoList = staffInfoDao.selectStaffIsWork();
-        PageInfo<StaffInfo> staffInfoPageInfo = new PageInfo<>(staffInfoList);
-        return staffInfoPageInfo;
+        return new PageInfo<>(staffInfoList);
     }
 
+    @Override
+    public boolean insertFeedback(String message, Integer userId) {
+        Integer groupId = userDao.selectGroupIdByUserId(userId);
+        if(groupId == null) {
+            return false;
+        }
+        List<Integer> managers = userDao.selectManager();
+        if(managers.isEmpty()) {
+            return false;
+        }
+        for(int manager : managers) {
+            Feedback feedback = new Feedback(manager, userId, groupId, message);
+            feedbackDao.insertSelective(feedback);
+        }
+        return true;
+    }
+
+    @Override
+    public PageInfo<Advice> selectAdviceByUser(Integer userId, Integer page, Integer pagesize) {
+        if(page == null) {
+            page = 1;
+        }
+        if(pagesize == null) {
+            pagesize = 10;
+        }
+        int total = (page - 1) * pagesize;
+        int count = adviceDao.selectCountByRecvId(userId);
+        if(total > count) {
+            return null;
+        }
+        PageHelper.startPage(page, pagesize);
+        List<Advice> advices = adviceDao.selectByRecvId(userId);
+        PageInfo<Advice> advicePageInfo = new PageInfo<>(advices);
+        advicePageInfo.setOrderBy(ORDER_BY_STATUS);
+        return advicePageInfo;
+    }
+
+    @Override
+    public boolean updateAdviceStatus(Integer id) {
+        return adviceDao.updateStatus(id) > 0;
+    }
 }

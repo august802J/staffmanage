@@ -1,157 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fanlu.staffmanage.dao.UserDao">
-  <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="group_id" jdbcType="INTEGER" property="groupId" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="auth" jdbcType="INTEGER" property="auth" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="job" jdbcType="VARCHAR" property="job" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, group_id, account, `password`, auth, `name`, job
-  </sql>
+    <resultMap id="BaseResultMap" type="com.fanlu.staffmanage.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="group_id" jdbcType="INTEGER" property="groupId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="auth" jdbcType="INTEGER" property="auth"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="job" jdbcType="VARCHAR" property="job"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , group_id, account, `password`, auth, `name`, job
+    </sql>
 
-  <!-- 通过主键查询用户信息 -->
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from `user`
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-
-  <!-- 通过查询账号ID验证账号是否存在 -->
-  <select id="selectIdByAccount" resultType="java.lang.Integer">
-    select ifnull(
-        (select id
+    <!-- 通过主键查询用户信息 -->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
         from `user`
-        where account = #{account,jdbcType=VARCHAR}), -1)
-  </select>
+        where id = #{id,jdbcType=INTEGER}
+    </select>
 
-  <!-- 通过账号查询密码 -->
-  <select id="selectAccountAndPassword" resultType="java.lang.String">
-    select `password`
-    from `user`
-    where account = #{account,jdbcType=VARCHAR}
-  </select>
+    <!-- 通过查询账号ID验证账号是否存在 -->
+    <select id="selectIdByAccount" resultType="java.lang.Integer">
+        select ifnull(
+                       (select id
+                        from `user`
+                        where account = #{account,jdbcType=VARCHAR}), -1)
+    </select>
 
-  <select id="selectAuthByAccount" resultType="java.lang.Integer">
-    select ifnull((
-        select auth
+    <!-- 通过账号查询密码 -->
+    <select id="selectAccountAndPassword" resultType="java.lang.String">
+        select `password`
         from `user`
-        where account = #{account,jdbcType=VARCHAR}), 0)
-  </select>
+        where account = #{account,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAuthByAccount" resultType="java.lang.Integer">
+        select ifnull((
+                          select auth
+                          from `user`
+                          where account = #{account,jdbcType=VARCHAR}), 0)
+    </select>
+
+    <select id="selectUserCount" resultType="java.lang.Integer">
+        select ifnull((select count(*) from user), 0)
+    </select>
+
+    <select id="selectGroupIdByUserId" resultType="java.lang.Integer">
+        select group_id
+        from `user`
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectUserByGroupId" resultType="java.lang.Integer">
+        select id
+        from `user`
+        where group_id=#{groupId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectManager" resultType="java.lang.Integer">
+        select id
+        from `user`
+        where auth=3
+    </select>
 
     <!-- 通过主键删除 -->
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from `user`
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from `user`
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
 
-  <!-- 插入一条用户信息 -->
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User" useGeneratedKeys="true">
-    insert into `user` (group_id, account, `password`,
-      auth, `name`, job)
-    values (#{groupId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{auth,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
-  </insert>
+    <!-- 插入一条用户信息 -->
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User"
+            useGeneratedKeys="true">
+        insert into `user` (group_id, account, `password`,
+                            auth, `name`, job)
+        values (#{groupId,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{auth,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
+    </insert>
 
-  <!-- 插入部分用户信息 -->
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User" useGeneratedKeys="true">
-    insert into `user`
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="groupId != null">
-        group_id,
-      </if>
-      <if test="account != null">
-        account,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="auth != null">
-        auth,
-      </if>
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="job != null">
-        job,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="groupId != null">
-        #{groupId,jdbcType=INTEGER},
-      </if>
-      <if test="account != null">
-        #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="auth != null">
-        #{auth,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="job != null">
-        #{job,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    <!-- 插入部分用户信息 -->
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fanlu.staffmanage.entity.User"
+            useGeneratedKeys="true">
+        insert into `user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="auth != null">
+                auth,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="job != null">
+                job,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                #{groupId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="auth != null">
+                #{auth,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                #{job,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-  <!-- 通过主键修改部分用户信息 -->
-  <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.User">
-    update `user`
-    <set>
-      <if test="groupId != null">
-        group_id = #{groupId,jdbcType=INTEGER},
-      </if>
-      <if test="account != null">
-        account = #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="auth != null">
-        auth = #{auth,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="job != null">
-        job = #{job,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <!-- 通过主键修改部分用户信息 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.fanlu.staffmanage.entity.User">
+        update `user`
+        <set>
+            <if test="groupId != null">
+                group_id = #{groupId,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="auth != null">
+                auth = #{auth,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="job != null">
+                job = #{job,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <!-- 通过主键修改全部用户信息 -->
-  <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.User">
-    update `user`
-    set group_id = #{groupId,jdbcType=INTEGER},
-      account = #{account,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      auth = #{auth,jdbcType=INTEGER},
-      `name` = #{name,jdbcType=VARCHAR},
-      job = #{job,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <!-- 通过主键修改全部用户信息 -->
+    <update id="updateByPrimaryKey" parameterType="com.fanlu.staffmanage.entity.User">
+        update `user`
+        set group_id   = #{groupId,jdbcType=INTEGER},
+            account    = #{account,jdbcType=VARCHAR},
+            `password` = #{password,jdbcType=VARCHAR},
+            auth       = #{auth,jdbcType=INTEGER},
+            `name`     = #{name,jdbcType=VARCHAR},
+            job        = #{job,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <!-- 通过主键修改用户权限 -->
-  <update id="updateAuthByPrimaryKey" parameterType="java.lang.Integer">
-    update `user`
-    set auth = #{auth,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <!-- 通过主键修改用户权限 -->
+    <update id="updateAuthByPrimaryKey" parameterType="java.lang.Integer">
+        update `user`
+        set auth = #{auth,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <update id="updatePasswordById">
-    update `user`
-    set `password` = #{password,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <update id="updatePasswordById">
+        update `user`
+        set `password` = #{password,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
 
 </mapper>

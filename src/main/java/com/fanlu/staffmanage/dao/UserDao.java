@@ -4,6 +4,8 @@ import com.fanlu.staffmanage.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author 15011_
  */
@@ -87,4 +89,31 @@ public interface UserDao {
      * @return
      */
     int selectAuthByAccount(String account);
+
+
+    /**
+     * 查询用户数量
+     * @return
+     */
+    int selectUserCount();
+
+    /**
+     * 查询用户的企业id
+     * @param id
+     * @return
+     */
+    Integer selectGroupIdByUserId(Integer id);
+
+    /**
+     * 通过企业id查询其所有用户
+     * @param groupId
+     * @return
+     */
+    List<Integer> selectUserByGroupId(Integer groupId);
+
+    /**
+     * 查询后台管理员
+     * @return
+     */
+    List<Integer> selectManager();
 }

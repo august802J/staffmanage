@@ -140,7 +140,7 @@ public class UserController {
     }
 
     /**
-     * 查询多个本公司人员（ 理解错误 ）
+     * 查询多个本公司人员
      * @param id
      * @param page
      * @param pagesize
@@ -174,6 +174,41 @@ public class UserController {
         } else {
             return Message.success().add("num", staff_ResignsInfo.getTotal())
                     .add("pages", staff_ResignsInfo.getPages()).add("result", staff_ResignsInfo.getList()).toJsonObject();
+        }
+    }
+
+    /**
+     * 添加一条反馈
+     * @param message
+     * @param userId
+     * @return
+     */
+    @PostMapping("/feedback")
+    public JSONObject addFeedback(String message, Integer userId) {
+        if(userService.insertFeedback(message, userId)) {
+            return Message.success().toJsonObject();
+        } else {
+            return Message.fail().toJsonObject();
+        }
+    }
+
+    @GetMapping("/advice")
+    public JSONObject selectAdvices(Integer userId, Integer page, Integer pagesize) {
+        PageInfo<Advice> pageInfo = userService.selectAdviceByUser(userId, page, pagesize);
+        if (pageInfo == null) {
+            return Message.fail().toJsonObject();
+        } else {
+            return Message.success().add("num", pageInfo.getTotal()).add("pages", pageInfo.getPages())
+                    .add("advices", pageInfo.getList()).toJsonObject();
+        }
+    }
+
+    @PutMapping("/advice")
+    public JSONObject updateAdviceStatus(Integer id) {
+        if(userService.updateAdviceStatus(id)) {
+            return Message.success().toJsonObject();
+        } else {
+            return Message.fail().toJsonObject();
         }
     }
 }

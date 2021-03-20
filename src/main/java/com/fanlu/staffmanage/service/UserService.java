@@ -51,4 +51,26 @@ public interface UserService {
 
     //查询多个离职人员
     PageInfo<StaffInfo> selectResignsByPage(Integer page, Integer pagesize);
+
+    /**
+     * 插入一条反馈建议
+     * @param message
+     * @param userId
+     * @return
+     */
+    boolean insertFeedback(String message, Integer userId);
+
+    /**
+     * 通过userid查询公告
+     * @param userId
+     * @return
+     */
+    PageInfo<Advice> selectAdviceByUser(Integer userId, Integer page, Integer pagesize);
+
+    /**
+     * 修改公告的阅读状态
+     * @param id
+     * @return
+     */
+    boolean updateAdviceStatus(Integer id);
 }
