@@ -96,10 +96,10 @@ public class LoginController {
                 default:
                     throw new IllegalStateException("Unexpected value: " + i);
             }
-            File dest = new File(path + fileName);
+            File dest = new File(Constant.IMAGES_PATH + path + fileName);
             try {
                 file.transferTo(dest);
-                paths.append(path).append("\n");
+                paths.append(path).append(fileName).append("\n");
             } catch (IOException e) {
                 e.printStackTrace();
                 return Message.fail(404, "上传失败").toJsonObject();

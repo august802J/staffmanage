@@ -65,6 +65,10 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 10MB
+  web:
+    resources:
+#      static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/, file:E://study//IdeaProjects//staffmanage//src//main//resources//static//images
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/, file:/home/jar/images
 
 mybatis:
   mapper-locations: classpath:mappers/*xml

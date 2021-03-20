@@ -42,11 +42,11 @@ public class Constant {
     public static final String STRING_MANAGER = "manager";
 
 
-//    public static final String IMAGES_PATH = "E:\\study\\IdeaProjects\\staffmanage\\src\\main\\resources\\static\\images\\";
-    public static final String IMAGES_PATH = "/home/jar/images/";
-    public static final String IMAGES_LOGO_PATH = IMAGES_PATH + "logo/";
-    public static final String IMAGES_IDCARD_PATH = IMAGES_PATH + "idCard/";
-    public static final String IMAGES_PERMISSION_PATH = IMAGES_PATH + "permission/";
+//    public static final String IMAGES_PATH = "E://study//IdeaProjects//staffmanage//src//main//resources//static//images";
+    public static final String IMAGES_PATH = "/home/jar/images";
+    public static final String IMAGES_LOGO_PATH = "/logo/";
+    public static final String IMAGES_IDCARD_PATH = "/idCard/";
+    public static final String IMAGES_PERMISSION_PATH = "/permission/";
     public static final int LOGIN_IMAGES = 3;
     public static final int IMAGE_SIZE = 1024 * 1024 * 2;
     public static final List<String> IMAGE_SUFFIX = Arrays.asList("image/jpg", "image/jpeg", "image/png");
