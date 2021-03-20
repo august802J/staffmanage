@@ -227,4 +227,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="selectIdByname" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select id
+    from user_coop
+    where user_coop_name like concat('%',#{name,jdbcType=VARCHAR},'%')
+  </select>
 </mapper>

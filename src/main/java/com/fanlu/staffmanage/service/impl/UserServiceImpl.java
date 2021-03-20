@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,10 +38,13 @@ public class UserServiceImpl implements UserService {
     private StaffAbilityDao staffAbilityDao;
 
     @Autowired
-    private FeedbackDao feedbackDao;
+    private UserDao userDao;
 
     @Autowired
-    private UserDao userDao;
+    UserCoopDao userCoopDao;
+
+    @Autowired
+    private FeedbackDao feedbackDao;
 
     @Autowired
     private AdviceDao adviceDao;
@@ -147,8 +151,7 @@ public class UserServiceImpl implements UserService {
         }
         PageHelper.startPage(page, pagesize);
         List<StaffInfo> staffInfoList = staffInfoDao.selectStaffInfoByGroupId(groupId);
-        PageInfo<StaffInfo> staffInfoPageInfo = new PageInfo<>(staffInfoList);
-        return staffInfoPageInfo;
+        return new PageInfo<>(staffInfoList);
     }
 
     @Override
@@ -161,6 +164,7 @@ public class UserServiceImpl implements UserService {
         }
         PageHelper.startPage(page, pagesize);
         List<StaffInfo> staffInfoList = staffInfoDao.selectStaffIsWork();
+        return new PageInfo<>(staffInfoList);
         return new PageInfo<>(staffInfoList);
     }
 
@@ -180,6 +184,56 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
+    @Override
+    public PageInfo<StaffInfo> selectStaffInfoByName(String name, Integer page, Integer pagesize) {
+        if(page == null) {
+            page = 1;
+        }
+        if(pagesize == null) {
+            pagesize = 9;
+        }
+        PageHelper.startPage(page, pagesize);
+        List<StaffInfo> staffInfoList = staffInfoDao.selectStaffInfoByName(name);
+        return new PageInfo<>(staffInfoList);
+    }
+
+    @Override
+    public PageInfo<StaffInfo> selectAllStaffInfoByPage(Integer page, Integer pagesize) {
+        if(page == null) {
+            page = 1;
+        }
+        if(pagesize == null) {
+            pagesize = 9;
+        }
+        PageHelper.startPage(page, pagesize);
+        List<StaffInfo> staffInfoList = staffInfoDao.selectAllStaffs();
+        return new PageInfo<>(staffInfoList);
+    }
+
+    @Override
+    public boolean isTrue(Integer staffId, Integer id) {
+        return staffInfoDao.selectGroupIdById(staffId) == userDao.selectGroupIdById(id);
+    }
+
+    @Override
+    public PageInfo<StaffInfo> selectStaffInfoByinc(String name, Integer page, Integer pagesize) {
+        if(page == null) {
+            page = 1;
+        }
+        if(pagesize == null) {
+            pagesize = 9;
+        }
+        PageHelper.startPage(page, pagesize);
+        List<Integer> staffInc= userCoopDao.selectIdByname(name);
+        List<StaffInfo> staffInfoList=new ArrayList<>();
+        for(Integer incid : staffInc){
+            staffInfoList.addAll(staffInfoDao.selectStaffInfoByGroupId(incid));
+        }
+        return new PageInfo<>(staffInfoList);
+    }
+
+
 
     @Override
     public PageInfo<Advice> selectAdviceByUser(Integer userId, Integer page, Integer pagesize) {

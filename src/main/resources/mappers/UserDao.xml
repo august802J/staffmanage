@@ -181,4 +181,10 @@
     </update>
 
 
+  <select id="selectGroupIdById" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select group_Id
+    from 'user'
+    where id=#{id,jdbcType=INTEGER}
+  </select>
+
 </mapper>

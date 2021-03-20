@@ -42,8 +42,14 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAllStaffs"  resultMap="BaseResultMap">
+    select id, staff_info_name, staff_info_age, staff_info_phone,staff_info_url,staff_info_sex,staff_info_groupId
+    <include refid="Base_Column_List" />
+    from staff_info
+  </select>
+
   <select id="selectStaffInfoByGroupId" resultType="com.fanlu.staffmanage.entity.StaffInfo">
-    select id, staff_info_name, staff_info_age, staff_info_phone,staff_info_url,staff_info_sex
+    select id, staff_info_name, staff_info_age, staff_info_phone,staff_info_url,staff_info_sex,staff_info_groupId
     from staff_info
     where staff_info_groupId = #{groupId,jdbcType=INTEGER}
   </select>
@@ -60,7 +66,7 @@
     where staff_info_groupId = #{groupId,jdbcType=INTEGER}
   </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from staff_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -312,4 +318,15 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="selectStaffInfoByName" parameterType="java.lang.String" resultType="com.fanlu.staffmanage.entity.StaffInfo">
+    select id, staff_info_name, staff_info_age, staff_info_phone,staff_info_url,staff_info_sex,staff_info_groupId
+    from staff_info
+    where staff_info_name like concat('%',#{name,jdbcType=VARCHAR},'%')
+  </select>
+
+  <select id="selectGroupIdById" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select staff_info_groupId
+    from staff_info
+    where id=#{id,jdbcType=INTEGER}
+  </select>
 </mapper>

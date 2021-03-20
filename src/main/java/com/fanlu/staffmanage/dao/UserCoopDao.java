@@ -26,4 +26,6 @@ public interface UserCoopDao {
      * @return
      */
     int selectTotal();
+
+    List<Integer> selectIdByname(String name);
 }

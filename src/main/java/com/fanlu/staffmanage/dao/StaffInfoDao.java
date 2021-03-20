@@ -33,4 +33,10 @@ public interface StaffInfoDao {
     int selectTotal(Integer groupId);
 
     List<StaffInfo> selectStaffIsWork();
+
+    List<StaffInfo> selectStaffInfoByName(String name);
+
+    List<StaffInfo> selectAllStaffs();
+
+    int selectGroupIdById(Integer id);
 }

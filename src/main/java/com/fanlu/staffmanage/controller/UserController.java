@@ -1,12 +1,17 @@
 package com.fanlu.staffmanage.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fanlu.staffmanage.dto.Inc;
 import com.fanlu.staffmanage.entity.*;
+import com.fanlu.staffmanage.service.SuperService;
 import com.fanlu.staffmanage.service.UserService;
 import com.fanlu.staffmanage.utils.Message;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by YGwhere on 2021/2/21 22:20
@@ -21,24 +26,32 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    SuperService superService;
+
     /**
      * 修改指定者评价(已测)
      * @param evaluationMessageJson
      * @return
      */
     @PutMapping("/evaluation")
-    public JSONObject updateStaff_evaluation(@RequestBody JSONObject evaluationMessageJson) {
+    public JSONObject updateStaff_evaluation(@RequestBody JSONObject evaluationMessageJson,Integer id) {
         StaffEvaluation staffEvaluation = JSONObject.parseObject(evaluationMessageJson.toJSONString(), StaffEvaluation.class);
-        if ("".equals(JSONObject.toJSONString(staffEvaluation)) || staffEvaluation.getId() == null) {
+        if (id==null||"".equals(JSONObject.toJSONString(staffEvaluation)) || staffEvaluation.getId() == null) {
             return Message.fail(628, "请求格式错误").toJsonObject();
         }
-        StaffEvaluation staffEvaluation1 = userService.updateStaff_evaluation(staffEvaluation);
-        String staff_eva = JSONObject.toJSONString(staffEvaluation1);
-        if (staff_eva.equals("")) {
-            return Message.fail().toJsonObject();
-        } else {
-            return Message.success().add("staffEvaluation", staff_eva).toJsonObject();
+        if(userService.isTrue(staffEvaluation.getStaffId(),id)){
+            StaffEvaluation staffEvaluation1 = userService.updateStaff_evaluation(staffEvaluation);
+            String staff_eva = JSONObject.toJSONString(staffEvaluation1);
+            if (staff_eva.equals("")) {
+                return Message.fail().toJsonObject();
+            } else {
+                return Message.success().add("staffEvaluation", staff_eva).toJsonObject();
+            }
+        }else{
+            return Message.fail(628,"没有权限").toJsonObject();
         }
+
     }
 
     /**
@@ -139,6 +152,72 @@ public class UserController {
         }
     }
 
+    /*
+     * 对方法的描述
+     *
+     根据名字模糊查询员工
+     * @return
+     * @throws
+     */
+    @GetMapping("/stavesbyname")
+    public JSONObject getStavesbyName(String name, Integer page, Integer pagesize) {
+        if (name == null) {
+            return getAllStaves(page,pagesize);
+        }
+        PageInfo<StaffInfo> staffsInfo = userService.selectStaffInfoByName(name, page, pagesize);
+        if (staffsInfo == null) {
+            return Message.fail().toJsonObject();
+        } else {
+            List<Inc> staffsInc = new ArrayList<>();
+            for(StaffInfo staff:staffsInfo.getList()){
+                staffsInc.add(superService.getIncDetail(staff.getStaffInfoGroupid()));
+            }
+            return Message.success().add("num", staffsInfo.getTotal())
+                    .add("pages", staffsInfo.getPages()).add("staffsInfo", staffsInfo.getList()).add("staffsInc",staffsInc).toJsonObject();
+        }
+    }
+
+    @GetMapping("/stavesbyinc")
+    public JSONObject getStavesbyInc(String name, Integer page, Integer pagesize) {
+        if (name == null) {
+            return getAllStaves(page,pagesize);
+        }
+        PageInfo<StaffInfo> staffsInfo = userService.selectStaffInfoByinc(name, page, pagesize);
+        if (staffsInfo == null) {
+            return Message.fail().toJsonObject();
+        } else {
+            List<Inc> staffsInc = new ArrayList<>();
+            for(StaffInfo staff:staffsInfo.getList()){
+                staffsInc.add(superService.getIncDetail(staff.getStaffInfoGroupid()));
+            }
+            return Message.success().add("num", staffsInfo.getTotal())
+                    .add("pages", staffsInfo.getPages()).add("staffsInfo", staffsInfo.getList()).add("staffsInc",staffsInc).toJsonObject();
+        }
+    }
+
+
+
+    /*
+     * 对方法的描述
+     * 
+     查询所有员工列表
+     * @return 
+     * @throws 
+     */
+    @GetMapping("/allstaves")
+    public JSONObject getAllStaves(Integer page, Integer pagesize) {
+        PageInfo<StaffInfo> staffsInfo = userService.selectAllStaffInfoByPage(page, pagesize);
+        if (staffsInfo == null) {
+            return Message.fail().toJsonObject();
+        } else {
+            List<Inc> staffsInc = new ArrayList<>();
+            for(StaffInfo staff:staffsInfo.getList()){
+                staffsInc.add(superService.getIncDetail(staff.getStaffInfoGroupid()));
+            }
+            return Message.success().add("num", staffsInfo.getTotal())
+                    .add("pages", staffsInfo.getPages()).add("staffsInfo", staffsInfo.getList()).add("staffsInc",staffsInc).toJsonObject();
+        }
+    }
     /**
      * 查询多个本公司人员
      * @param id
@@ -155,8 +234,12 @@ public class UserController {
         if (staffsInfo == null) {
             return Message.fail().toJsonObject();
         } else {
+            List<Inc> staffsInc = new ArrayList<>();
+            for(StaffInfo staff:staffsInfo.getList()){
+                staffsInc.add(superService.getIncDetail(staff.getStaffInfoGroupid()));
+            }
             return Message.success().add("num", staffsInfo.getTotal())
-                    .add("pages", staffsInfo.getPages()).add("result", staffsInfo.getList()).toJsonObject();
+                    .add("pages", staffsInfo.getPages()).add("staffsInfo", staffsInfo.getList()).add("inc",staffsInc).toJsonObject();
         }
     }
 

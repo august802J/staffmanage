@@ -90,6 +90,15 @@ public interface UserDao {
      */
     int selectAuthByAccount(String account);
 
+    /*
+     * 对方法的描述
+     *
+     通过ID查找公司id
+     * @return
+     * @throws
+     */
+    int selectGroupIdById(Integer id);
+
 
     /**
      * 查询用户数量
