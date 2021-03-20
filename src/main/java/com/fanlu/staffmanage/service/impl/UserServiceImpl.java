@@ -165,7 +165,6 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(page, pagesize);
         List<StaffInfo> staffInfoList = staffInfoDao.selectStaffIsWork();
         return new PageInfo<>(staffInfoList);
-        return new PageInfo<>(staffInfoList);
     }
 
     @Override
